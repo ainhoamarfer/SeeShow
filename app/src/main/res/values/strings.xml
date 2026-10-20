@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SeeShow</string>
+    <string name="imagen_de_cabecera">imagen_de_cabecera</string>
+    <string name="favorito">imagen_de_cabecera</string>
 </resources>
