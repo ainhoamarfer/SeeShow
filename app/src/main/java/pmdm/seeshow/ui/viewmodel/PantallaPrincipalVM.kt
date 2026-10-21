@@ -1,4 +1,4 @@
-package com.ainhoamarfer.seriesee.ui.viewmodel
+package pmdm.seeshow.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
