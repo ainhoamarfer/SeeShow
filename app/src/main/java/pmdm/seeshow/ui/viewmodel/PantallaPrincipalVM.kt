@@ -21,10 +21,12 @@ class PantallaPrincipalVM : ViewModel(){
 
     fun load(){
         //cargo los datos
-
         _uiState.value = _uiState.value.copy(datosTarjeta = listOf(
-
+            DatosTarjeta("Titulo 1", "Descripcion 1"),
+            DatosTarjeta("Titulo 2", "Descripcion 2"),
+            DatosTarjeta("Titulo 3", "Descripcion 3"),
         ))
+
     }
 
     fun onBorrar(item: DatosTarjeta){

@@ -6,12 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import pmdm.seeshow.ui.pagina.PantallaPrincipal
 import pmdm.seeshow.ui.theme.SeeShowTheme
+import pmdm.seeshow.ui.viewmodel.PantallaPrincipalVM
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +23,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SeeShowTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                Scaffold(modifier = Modifier.fillMaxSize(),
+                    topBar = {
+
+                    }
+                )
+                { innerPadding ->
+                    ComponentList(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -31,17 +39,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ComponentList(modifier: Modifier = Modifier) {
+    //meter aqui los componentes
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     SeeShowTheme {
-        Greeting("Android")
+        Surface {
+            ComponentList()
+        }
     }
 }
