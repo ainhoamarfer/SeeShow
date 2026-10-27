@@ -20,7 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+//primero se definenlos datos y luego lo visual
 
+/**
+ * datos de la tarjetaItem
+ */
 data class TarjetaItemData(
     val titulo: String,
     val descripcion: String,
@@ -29,8 +33,10 @@ data class TarjetaItemData(
 )
 
 @Composable
-fun TarjetaItem(data: TarjetaItemData, modifier: Modifier = Modifier) {
-
+fun TarjetaItem(
+    data: TarjetaItemData,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = cardElevation(defaultElevation = 4.dp)
