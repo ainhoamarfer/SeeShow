@@ -3,6 +3,7 @@ package pmdm.seeshow.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 data class DatosTarjeta(
@@ -17,7 +18,7 @@ data class PantallaPrincipalUIState(
 //es necesario que la pantalla principal herede de ViewModel, genera una instancia que se repite
 class PantallaPrincipalVM : ViewModel(){
     private val _uiState = MutableStateFlow(PantallaPrincipalUIState())
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<PantallaPrincipalUIState> = _uiState.asStateFlow() //solo se puede consumir (leer)
 
     fun load(){
         //cargo los datos
