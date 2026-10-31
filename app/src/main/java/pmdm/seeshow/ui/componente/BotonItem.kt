@@ -89,21 +89,15 @@ fun BotonComp(
         Button(
             onClick = onClick,
             modifier = modifier,
-            shape = RoundedCornerShape(
-                if (esBtnConIcono) 5.dp else 4.dp
+            shape = RoundedCornerShape( 4.dp
             ),
+
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorFondo,
                 contentColor = colorTexto
             ),
-            contentPadding = if (esBtnConIcono) {
-                ButtonDefaults.ContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
-            elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = if (esBtnConIcono) 6.dp else 0.dp
-            )
+
+            contentPadding = ButtonDefaults.ContentPadding,
         ) {
             contenido()
         }
