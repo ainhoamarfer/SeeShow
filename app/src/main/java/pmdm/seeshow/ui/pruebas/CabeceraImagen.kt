@@ -1,4 +1,4 @@
-package pmdm.seeshow.ui.componente
+package pmdm.seeshow.ui.pruebas
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

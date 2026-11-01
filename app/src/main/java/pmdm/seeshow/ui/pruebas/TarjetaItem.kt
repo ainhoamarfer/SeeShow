@@ -1,4 +1,4 @@
-package pmdm.seeshow.ui.componente
+package pmdm.seeshow.ui.pruebas
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
