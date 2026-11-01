@@ -1,11 +1,15 @@
 package pmdm.seeshow.ui.componente
 
+import android.view.Surface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
@@ -17,8 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pmdm.seeshow.R
+import pmdm.seeshow.ui.theme.SeeShowTheme
+import androidx.compose.material3.Surface
+
 
 data class CabeceraSerieItemData(
     val titulo: String,
@@ -34,11 +42,11 @@ data class CabeceraSerieItemData(
 fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier) {
 
     Box(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().height(300.dp) //TODO provisional
     ) {
 
         Icon(
-            //TODO cambiar el check por el corazon, hacer componente por separado porque lo voy a usar mas veces
+            //TODO cambiar el check
             painter = painterResource(id = R.drawable.check),
             contentDescription = "Guardar",
             tint = Color.White,
@@ -54,6 +62,8 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
                     modifier = Modifier.fillMaxSize()
                 )
             }
+            Spacer(modifier = Modifier.width(16.dp))
+
             Column(modifier = Modifier.fillMaxSize()) {
                 Text(
                     text = data.titulo,
@@ -84,12 +94,38 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
 
     Text(
         text = data.descripcion,
-        style = MaterialTheme.typography.bodyLarge,
+        style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurface,
-        maxLines = 2,
         overflow = TextOverflow.Ellipsis
     )
 
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 400
+)
+@Composable
+fun PreviewCabeceraSerieItem() {
+    SeeShowTheme {
+        Surface() {
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(16.dp)
+            ) {
+                CabeceraSerieItem(
+                    data = CabeceraSerieItemData(
+                        titulo = "Severance",
+                        fecha = "2022 · Actualidad",
+                        creadaPor = "Creada por Dan Erickson · Dirigida por Ben Stiller",
+                        descripcion = "Mark Scout dirige un equipo en Lumon Industries, cuyos empleados se han sometido a un procedimiento quirúrgico que separa sus recuerdos entre su ámbito laboral y su vida personal. Este atrevido experimento de \"equilibrio entre el trabajo y la vida personal\" se pone en tela de juicio cuando Mark se encuentra en el centro de un misterio que le obligará a confrontar la verdadera naturaleza de su trabajo... y de sí mismo.",
+                        plataforma = "APPLE TV+",
+                        icono = android.R.drawable.ic_menu_camera, // Placeholder
+                        imagen = android.R.drawable.ic_menu_gallery // Placeholder
+                    )
+                )
+            }
+        }
+    }
 }
 
 

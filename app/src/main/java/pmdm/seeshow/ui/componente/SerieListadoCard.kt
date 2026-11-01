@@ -124,11 +124,11 @@ fun SerieListadoCard(
     }
 }
 
-@Preview(name = "Card Vertical", showBackground = true, backgroundColor = 0xFF0C0E10)
+@Preview(showBackground = true)
 @Composable
 fun PreviewSerieCardVer() {
     SeeShowTheme {
-        Surface(color = MaterialTheme.colorScheme.background) {
+        Surface() {
             SerieListadoCard(
                 datos = DatosSerieListadoCard(
                     recursoImagen = R.drawable.succesion,
