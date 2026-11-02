@@ -2,4 +2,23 @@
     <string name="app_name">SeeShow</string>
     <string name="imagen_de_cabecera">imagen_de_cabecera</string>
     <string name="favorito">imagen_de_cabecera</string>
+
+    <!-- Tarjeta de serie Succession -->
+    <string name="titulo_serie_succession">Succession</string>
+    <string name="temporada_capitulos">T3 · 28 Caps</string>
+    <string name="puntuacion">4.9</string>
+    <string name="porcentaje">24%%</string>
+
+    <!-- Tarjeta de serie Severance -->
+    <string name="titulo_serie_severance">Severance</string>
+    <string name="fecha_severance">2022 · Actualidad</string>
+    <string name="creada_por_seve">Creada por Dan Erickson · Dirigida por Ben Stiller</string>
+    <string name="descripcion_seve">Mark Scout dirige un equipo en Lumon Industries, cuyos empleados se han sometido a un procedimiento quirúrgico que separa sus recuerdos entre su ámbito laboral y su vida personal. Este atrevido experimento de \"equilibrio entre el trabajo y la vida personal\" se pone en tela de juicio cuando Mark se encuentra en el centro de un misterio que le obligará a confrontar la verdadera naturaleza de su trabajo... y de sí mismo.</string>
+    <string name="plataforma_seve">APPLE TV+</string>
+
+
+    <!-- Botones -->
+    <string name="boton_temporada_capitulos">T3 · 28 Caps</string>
+    <string name="boton_visto">Visto</string>
+    <string name="boton_marcar_como_visto">Marcar como visto</string>
 </resources>

@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pmdm.seeshow.seeder.getDatosSerie
 import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.SerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
@@ -56,112 +57,7 @@ class MainActivity : ComponentActivity() {
 fun PantallaListado(modifier: Modifier = Modifier) {
 
     //Lista de prueba para la parte de abajo (4 en 4)
-    val listaSeriesRestantes = listOf(
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "The Office",
-            subtitulo = "T9 · 201 Caps",
-            puntuacion = "4.8",
-            porcentajeCompletada = "90%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Narcos",
-            subtitulo = "T3 · 30 Caps",
-            puntuacion = "4.7",
-            porcentajeCompletada = "50%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Breaking Bad",
-            subtitulo = "T5 · 62 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "80%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-        DatosSerieListadoCard(
-            recursoImagen = R.drawable.succesion,
-            titulo = "Friends",
-            subtitulo = "T10 · 236 Caps",
-            puntuacion = "4.9",
-            porcentajeCompletada = "100%",
-            tipo = TipoSerieCard.VERTICAL
-        ),
-    )
+    val listaSeriesRestantes = getDatosSerie()
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),

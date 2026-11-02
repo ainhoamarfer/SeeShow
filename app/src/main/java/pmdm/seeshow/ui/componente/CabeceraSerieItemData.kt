@@ -28,9 +28,13 @@ import pmdm.seeshow.R
 import pmdm.seeshow.ui.theme.SeeShowTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
+import pmdm.seeshow.ui.theme.AppTypography
+import pmdm.seeshow.ui.theme.TextWhite
 
 
 data class CabeceraSerieItemData(
+    val id: Int,
     val titulo: String,
     val fecha: String,
     val creadaPor: String,
@@ -51,7 +55,7 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
             //TODO cambiar el check
             painter = painterResource(id = R.drawable.check),
             contentDescription = "Guardar",
-            tint = Color.White,
+            tint = TextWhite,
             modifier = Modifier.align(Alignment.TopEnd)
                 .size(30.dp)
         )
@@ -70,22 +74,22 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
             Column(modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.Bottom) {
                 Text(
                     text = data.titulo,
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 1,
+                    style = AppTypography.headlineLarge,
+                    color = TextWhite,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = data.fecha,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    style = AppTypography.bodyMedium,
+                    color = TextWhite,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = data.creadaPor,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    style = AppTypography.bodySmall,
+                    color = TextWhite,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -96,8 +100,8 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
     Spacer(modifier = Modifier.height(16.dp))
     Text(
         text = data.descripcion,
-        style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurface,
+        style = AppTypography.bodySmall,
+        color = TextWhite,
         overflow = TextOverflow.Ellipsis
     )
 
@@ -116,11 +120,12 @@ fun PreviewCabeceraSerieItem() {
             ) {
                 CabeceraSerieItem(
                     data = CabeceraSerieItemData(
-                        titulo = "Severance",
-                        fecha = "2022 · Actualidad",
-                        creadaPor = "Creada por Dan Erickson · Dirigida por Ben Stiller",
-                        descripcion = "Mark Scout dirige un equipo en Lumon Industries, cuyos empleados se han sometido a un procedimiento quirúrgico que separa sus recuerdos entre su ámbito laboral y su vida personal. Este atrevido experimento de \"equilibrio entre el trabajo y la vida personal\" se pone en tela de juicio cuando Mark se encuentra en el centro de un misterio que le obligará a confrontar la verdadera naturaleza de su trabajo... y de sí mismo.",
-                        plataforma = "APPLE TV+",
+                        id = 1,
+                        titulo = stringResource(R.string.titulo_serie_severance),
+                        fecha = stringResource(R.string.fecha_severance),
+                        creadaPor = stringResource(R.string.creada_por_seve),
+                        descripcion = stringResource(R.string.descripcion_seve),
+                        plataforma = stringResource(R.string.plataforma_seve),
                         icono = android.R.drawable.ic_menu_camera, // Placeholder
                         imagen = R.drawable.severance
                     )

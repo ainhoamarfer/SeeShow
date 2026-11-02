@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pmdm.seeshow.ui.theme.SeeShowTheme
 import androidx.compose.material3.Surface
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import pmdm.seeshow.R
 
@@ -35,6 +36,7 @@ enum class TipoSerieCard(
 }
 //Datos comunes en todas
 data class DatosSerieListadoCard(
+    val id: Int,
     val recursoImagen: Int,
     val titulo: String,
     val subtitulo: String,
@@ -131,11 +133,12 @@ fun PreviewSerieCardVer() {
         Surface() {
             SerieListadoCard(
                 datos = DatosSerieListadoCard(
+                    id = 1,
                     recursoImagen = R.drawable.succesion,
-                    titulo = "Succession",
-                    subtitulo = "T3 · 28 Caps",
-                    puntuacion = "4.9",
-                    porcentajeCompletada = "24%",
+                    titulo = stringResource(R.string.titulo_serie_succession),
+                    subtitulo = stringResource(R.string.temporada_capitulos),
+                    puntuacion = stringResource(R.string.puntuacion),
+                    porcentajeCompletada = stringResource(R.string.porcentaje),
                     tipo = TipoSerieCard.VERTICAL
                 ),
                 modifier = Modifier.padding(16.dp)
