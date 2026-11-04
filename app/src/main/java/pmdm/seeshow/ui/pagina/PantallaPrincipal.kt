@@ -16,12 +16,7 @@ fun PantallaPrincipal(viewModel: PantallaPrincipalVM = viewModel(), modifier: Mo
     val state by viewModel.uiState.collectAsState() //observer que refresca la pantalla
 
     Column(modifier = modifier){
-//        CabeceraImagen(){
-//
-//        }
-
         Text(text = "soy principal")
-
     }
 }
 

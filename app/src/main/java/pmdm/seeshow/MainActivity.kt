@@ -27,6 +27,7 @@ import pmdm.seeshow.seeder.getDatosSerie
 import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.SerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
+import pmdm.seeshow.ui.pagina.PantallaListado
 import pmdm.seeshow.ui.theme.SeeShowTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,86 +53,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//TODO HACER LAS MODIFICACIONES DE CARDS HORIZONTAL Y GRANDE
-@Composable
-fun PantallaListado(modifier: Modifier = Modifier) {
-
-    //Lista de prueba para la parte de abajo (4 en 4)
-    val listaSeriesRestantes = getDatosSerie()
-
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(4),
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        //ILA DE ARRIBA, EL SPAN PARA QUE OCUPE 4 HUECOS
-        item(span = { GridItemSpan(4) }) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                //columna izquierda: Tarjeta grande
-                Box(modifier = Modifier.weight(1f)) {
-                    SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.VERTICAL_GRANDE
-                        )
-                    )
-                }
-
-                //columna derecha: dos horizontales
-                Column(
-                    modifier = Modifier.weight(1f), //TODO entender esto
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.HORIZONTAL
-                        )
-                    )
-                    SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.HORIZONTAL
-                        )
-                    )
-                }
-            }
-        }
-
-        //RESTO DE LA LISTA
-        items(listaSeriesRestantes) { serie ->
-            SerieListadoCard(
-                datos = serie,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SeeShowTheme {
-        Surface {
-            PantallaListado()
-        }
-    }
-}

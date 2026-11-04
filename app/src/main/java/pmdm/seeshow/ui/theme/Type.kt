@@ -68,8 +68,16 @@ val AppTypography = Typography(
     // 6. ETIQUETAS / BOTONES (Para la barra de navegación o chips)
     labelMedium = TextStyle(
         fontFamily = Figtree,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        lineHeight = 16.sp
+    ),
+    // 7. ETIQUETAS / BOTONES pequeños
+    labelSmall = TextStyle(
+        fontFamily = Figtree,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
         lineHeight = 16.sp
     )
+
 )
