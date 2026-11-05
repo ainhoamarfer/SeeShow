@@ -1,46 +1,35 @@
 package pmdm.seeshow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import pmdm.seeshow.seeder.getDatosSerie
-import pmdm.seeshow.ui.componente.DatosSerieListadoCard
-import pmdm.seeshow.ui.componente.SerieListadoCard
-import pmdm.seeshow.ui.componente.TipoSerieCard
 import pmdm.seeshow.ui.pagina.PantallaListado
 import pmdm.seeshow.ui.theme.SeeShowTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val TAG = "CICLO_VIDA"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d(TAG, "onCreate: Activity creada")
+
         enableEdgeToEdge()
+
         setContent {
             SeeShowTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-
-                        //TODO hacer Scaffold
+                    //TODO hacer Scaffold
                     }
                 )
                 { innerPadding ->
@@ -51,5 +40,31 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: Activity visible")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: Activity en primer plano")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: Activity pierde el primer plano")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: Activity deja de ser visible")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: Activity destruida")
+    }
 }
+
 
