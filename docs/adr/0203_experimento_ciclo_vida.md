@@ -8,25 +8,25 @@ Sobre un proyecto propio (puede ser el esqueleto del Proyecto A si ya existe, o 
 
 Arranque normal de la app.
 
-![a2_3_parte1.png](resources/a2_3_parte1.png)
+![a2_3_parte1.png](../resources/a2_3_parte1.png)
 
 Girar la pantalla.
 
-![a2_3_parte2.png](resources/a2_3_parte2.png)
+![a2_3_parte2.png](../resources/a2_3_parte2.png)
 
 Pulsar el botón de inicio y volver a la app.
 
-![a2_3_parte3.png](resources/a2_3_parte3.png)
+![a2_3_parte3.png](../resources/a2_3_parte3.png)
 
 Cerrar completamente la app y reabrirla.
 
-![a2_3_parte4.png](resources/a2_3_parte4.png)
+![a2_3_parte4.png](../resources/a2_3_parte4.png)
 
 
 Código de onSaveInstanceState y una comprobación de que funciona.
 
-![a2_3_parte5.png](resources/a2_3_parte5.png)
-![a2_3_parte6.png](resources/a2_3_parte6.png)
+![a2_3_parte5.png](../resources/a2_3_parte5.png)
+![a2_3_parte6.png](../resources/a2_3_parte6.png)
 
 Clico el botón 3 veces para que muestre tres y al girar la pantalla sigue mostrando 3
 

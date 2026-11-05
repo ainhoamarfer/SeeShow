@@ -58,7 +58,7 @@ Marta, 25, generacion z, soltura con las apps, la abre después de acabar una se
 
 *Dibuja las pantallas principales. A mano y fotografiado es válido.*
 
-[IMG_1118.jpeg](resources/IMG_1118.jpeg)
+[IMG_1118.jpeg](../resources/IMG_1118.jpeg)
 
 <!-- Sustituye el bloque anterior por: ![Bocetos](ruta/a/la/imagen.png) -->
 
