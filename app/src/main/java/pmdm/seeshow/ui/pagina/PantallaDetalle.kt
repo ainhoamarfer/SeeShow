@@ -37,7 +37,8 @@ fun PantallaDetalle(modifier: Modifier = Modifier) {
                 descripcion = stringResource(R.string.descripcion_seve),
                 plataforma = stringResource(R.string.plataforma_seve),
                 icono = android.R.drawable.ic_menu_camera, // Placeholder
-                imagen = R.drawable.severance
+                imagen = R.drawable.severance,
+                imagenFondo = R.drawable.imagen_cabecera_severance
             )
         )
 

@@ -43,7 +43,7 @@ val AppTypography = Typography(
 
     // 3. SUBTÍTULOS (Ej: "The We We Are", "T1 · E09")
     titleMedium = TextStyle(
-        fontFamily = Figtree,
+        fontFamily = SourceSerif,
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
         lineHeight = 22.sp
