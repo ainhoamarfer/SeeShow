@@ -18,6 +18,8 @@ import pmdm.seeshow.ui.componente.BotonData
 import pmdm.seeshow.ui.componente.Botones
 import pmdm.seeshow.ui.componente.CabeceraSerieItem
 import pmdm.seeshow.ui.componente.CabeceraSerieItemData
+import pmdm.seeshow.ui.componente.ResenaPremium
+import pmdm.seeshow.ui.componente.ResenaPremiumData
 import pmdm.seeshow.ui.componente.VarianteBoton
 import pmdm.seeshow.ui.theme.SeeShowTheme
 
@@ -38,6 +40,14 @@ fun PantallaDetalle(modifier: Modifier = Modifier) {
                 imagen = R.drawable.severance
             )
         )
+
+        ResenaPremium(
+            data = ResenaPremiumData(
+                resena = stringResource(R.string.resena_ejemplo),
+                autor = stringResource(R.string.resena_autor),
+            )
+        )
+
         //Botonera
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -68,6 +78,8 @@ fun PantallaDetalle(modifier: Modifier = Modifier) {
                 )
             )
         }
+
+
 
     }
 }

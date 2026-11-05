@@ -35,7 +35,7 @@ val AppTypography = Typography(
 
     // 2. TÍTULOS DE SECCIÓN (Ej: "Reparto", "También te puede gustar")
     titleLarge = TextStyle(
-        fontFamily = Figtree,
+        fontFamily = SourceSerif,
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
         lineHeight = 24.sp

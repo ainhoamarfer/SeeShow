@@ -2,6 +2,7 @@ package pmdm.seeshow.ui.componente
 
 import android.view.Surface
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,13 +29,16 @@ import pmdm.seeshow.R
 import pmdm.seeshow.ui.theme.SeeShowTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import pmdm.seeshow.ui.theme.AppTypography
+import pmdm.seeshow.ui.theme.BackgroundBlack
 import pmdm.seeshow.ui.theme.TextWhite
 
 
 data class CabeceraSerieItemData(
     val id: Int,
+    val imagenFondo: Int,
     val titulo: String,
     val fecha: String,
     val creadaPor: String,
@@ -48,20 +52,49 @@ data class CabeceraSerieItemData(
 fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier) {
 
     Box(
-        modifier = modifier.fillMaxWidth().height(220.dp) //TODO provisional
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp)
     ) {
+        //LA IMAGEN DE FONDO
+        Image(
+            painter = painterResource(id = data.imagenFondo),
+            contentDescription = null,
+            contentScale = ContentScale.Crop, // Para que llene todo sin deformarse
+            modifier = Modifier.matchParentSize()
+        )
+
+        //EL FILTRO FADE
+        Box(modifier = Modifier
+                .matchParentSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            BackgroundBlack.copy(alpha = 0.8f),
+                            BackgroundBlack
+                        )
+                    )
+                )
+        )
 
         Icon(
             //TODO cambiar el check
             painter = painterResource(id = R.drawable.check),
             contentDescription = "Guardar",
-            tint = TextWhite,
-            modifier = Modifier.align(Alignment.TopEnd)
+            tint = BackgroundBlack,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(16.dp)
                 .size(30.dp)
         )
 
-        Row(modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.width(150.dp)) {
+        Row( modifier = Modifier
+            .align(Alignment.BottomStart)
+            .fillMaxWidth()
+            .padding(8.dp))
+        {
+            Box(modifier = Modifier.width(130.dp).height(200.dp).align(Alignment.Bottom)) {
                 Image(
                     painter = painterResource(id = data.imagen),
                     contentDescription = data.titulo,
@@ -97,6 +130,8 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
         }
     }
 
+
+
     Spacer(modifier = Modifier.height(16.dp))
     Text(
         text = data.descripcion,
@@ -127,7 +162,8 @@ fun PreviewCabeceraSerieItem() {
                         descripcion = stringResource(R.string.descripcion_seve),
                         plataforma = stringResource(R.string.plataforma_seve),
                         icono = android.R.drawable.ic_menu_camera, // Placeholder
-                        imagen = R.drawable.severance
+                        imagen = R.drawable.severance,
+                        imagenFondo = R.drawable.imagen_cabecera_severance
                     )
                 )
             }
