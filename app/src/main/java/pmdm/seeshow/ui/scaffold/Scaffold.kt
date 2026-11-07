@@ -2,6 +2,7 @@ package pmdm.seeshow.ui.scaffold
 
 import android.R.attr.navigationIcon
 import android.R.attr.title
+import android.media.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -15,33 +16,100 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import pmdm.seeshow.R
-import pmdm.seeshow.ui.theme.AppTypography
-import pmdm.seeshow.ui.theme.BackgroundBlack
-import pmdm.seeshow.ui.theme.Primary
-import pmdm.seeshow.ui.theme.SeeShowTheme
-import pmdm.seeshow.ui.theme.SurfaceComponent
-import pmdm.seeshow.ui.theme.TextWhite
+import pmdm.seeshow.ui.theme.*
+
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+
+import androidx.compose.foundation.Image
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.TopAppBarDefaults
 
 
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold() {
+
+    // Estado del menú lateral
+    val drawerState = rememberDrawerState(
+        initialValue = DrawerValue.Closed
+    )
 
     // Opción seleccionada en la barra inferior
     var pantallaSeleccionada by remember {
         mutableIntStateOf(0)
     }
+    // Control de corrutinas
+    val scope = rememberCoroutineScope()
 
     Scaffold(
 
-        //topBar = {
-        //    navigationIcon = {
-        //        IconButton(onClick = { /* abrir menú o volver atrás */ }) {
-        //            Icon(painterResource(id = R.drawable.eye), contentDescription = "Abrir menú")
-        //        }
-        //    }
-//
-        //},
+        topBar = {
+            CenterAlignedTopAppBar(
+
+                //menu hamburguesa
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            scope.launch {
+                                drawerState.open()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.menu),
+                            contentDescription = "Abrir menú",
+                            tint = TextWhite,
+                            modifier = Modifier.height(30.dp)
+                        )
+                    }
+                },
+
+                //Logo centrado
+                title = {
+                    Image(
+                        painter = painterResource(R.drawable.logo_seeshow),
+                        contentDescription = "SeeShow",
+                        modifier = Modifier.height(32.dp)
+                    )
+                },
+
+                // Ajustes
+                actions = {
+                    IconButton(
+                        onClick = {
+                            pantallaSeleccionada = 5
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ajustes),
+                            contentDescription = "Ajustes",
+                            tint = TextWhite,
+                            modifier = Modifier.height(30.dp)
+                        )
+                    }
+                },
+
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Transparent,
+                    scrolledContainerColor = BackgroundBlack,
+                    navigationIconContentColor = TextWhite,
+                    titleContentColor = TextWhite,
+                    actionIconContentColor = TextWhite
+                )
+            )
+        },
 
         // Barra inferior
         bottomBar = {
@@ -103,7 +171,7 @@ fun AppScaffold() {
                 NavigationBarItem(
                     selected = pantallaSeleccionada == 2,
                     onClick = {
-                        // Acción de crear
+                        // TODO Acción de crear
                     },
                     icon = {
                         Box(
@@ -129,7 +197,7 @@ fun AppScaffold() {
                     onClick = { pantallaSeleccionada = 3 },
                     icon = {
                         Icon(
-                            painter = painterResource(R.drawable.foro),
+                            painter = painterResource(R.drawable.foros),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
