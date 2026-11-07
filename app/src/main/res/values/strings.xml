@@ -23,4 +23,8 @@
     <string name="boton_marcar_como_visto">Marcar como visto</string>
     <string name="resena_ejemplo">«Un prodigio formal que eleva el misterio televisivo a la categoría de milagro kafkiano.»</string>
     <string name="resena_autor">— CUADERNO CINE-ZINE / SELECCIÓN OFICIAL</string>
+    <string name="descubrir">Descubrir</string>
+    <string name="series">Series</string>
+    <string name="foros">Foros</string>
+    <string name="perfil">Perfil</string>
 </resources>

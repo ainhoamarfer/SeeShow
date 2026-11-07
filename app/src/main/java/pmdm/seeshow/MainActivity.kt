@@ -28,6 +28,7 @@ import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.SerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
 import pmdm.seeshow.ui.pagina.PantallaListado
+import pmdm.seeshow.ui.scaffold.AppScaffold
 import pmdm.seeshow.ui.theme.SeeShowTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,18 +37,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SeeShowTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
+                AppScaffold();
 
-                        //TODO hacer Scaffold
-                    }
+                PantallaListado(
+                    modifier = Modifier
                 )
-                { innerPadding ->
-                    PantallaListado(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
             }
         }
     }
