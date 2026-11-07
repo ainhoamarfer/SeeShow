@@ -33,7 +33,7 @@ fun PantallaListado(modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
+        //contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {

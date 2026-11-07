@@ -38,10 +38,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             SeeShowTheme {
                 AppScaffold();
-
-                PantallaListado(
-                    modifier = Modifier
-                )
             }
         }
     }

@@ -33,8 +33,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
-
-
+import pmdm.seeshow.ui.pagina.PantallaListado
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -256,7 +255,7 @@ fun AppScaffold() {
         ) {
 
             when (pantallaSeleccionada) {
-                0 -> Text("Descubrir")
+                0 -> PantallaListado()
                 1 -> Text("Series")
                 2 -> Text("Crear")
                 3 -> Text("Foros")
