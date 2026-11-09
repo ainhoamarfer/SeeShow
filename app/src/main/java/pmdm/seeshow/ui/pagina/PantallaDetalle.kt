@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import pmdm.seeshow.R
 import pmdm.seeshow.ui.componente.BotonData
 import pmdm.seeshow.ui.componente.Botones
@@ -22,9 +26,23 @@ import pmdm.seeshow.ui.componente.ResenaPremium
 import pmdm.seeshow.ui.componente.ResenaPremiumData
 import pmdm.seeshow.ui.componente.VarianteBoton
 import pmdm.seeshow.ui.theme.SeeShowTheme
+import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
 
 @Composable
-fun PantallaDetalle(modifier: Modifier = Modifier) {
+fun PantallaDetalle(
+    serieId: String,
+    onRelacionadoClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: PantallaDetalleVM = viewModel()
+) {
+
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(serieId) {
+        viewModel.cargarSerie(serieId)
+    }
+
+    val serie = uiState.serie
 
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 

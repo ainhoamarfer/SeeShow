@@ -4,7 +4,7 @@ import pmdm.seeshow.R
 import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
 
-fun getDatosSerie(): List<DatosSerieListadoCard> {
+fun datosSerie(): List<DatosSerieListadoCard> {
     return listOf(
         DatosSerieListadoCard(
             id = 1,
@@ -126,3 +126,6 @@ fun getDatosSerie(): List<DatosSerieListadoCard> {
     )
 
 }
+
+
+fun seriePorId(id: Int): DatosSerieListadoCard? = datosSerie().find { it.id == id }

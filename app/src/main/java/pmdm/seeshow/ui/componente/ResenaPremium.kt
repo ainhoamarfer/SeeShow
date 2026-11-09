@@ -25,6 +25,7 @@ import pmdm.seeshow.ui.theme.*
 
 
 data class ResenaPremiumData(
+    //val id: UUID, TODO 
     val resena: String,
     val autor: String
 )
