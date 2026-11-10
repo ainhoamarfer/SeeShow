@@ -21,7 +21,7 @@ class PantallaDetalleVM : ViewModel() {
 
     val uiState: StateFlow<DetalleUIState> = _uiState.asStateFlow() //solo se puede consumir (leer)
 
-    fun cargarSerie(serieId: String) {
+    fun cargarSerie(serieId: Int) {
 
        _uiState.update {
           it.copy(serie = seriePorId(serieId))
