@@ -26,8 +26,7 @@ import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
 //TODO HACER LAS MODIFICACIONES DE CARDS HORIZONTAL Y GRANDE
 @Composable
 fun PantallaListado(
-    serieId: String,
-    onRelacionadoClick: (String) -> Unit,
+    serieId: Int,
     modifier: Modifier = Modifier,
     viewModel: PantallaDetalleVM = viewModel()
 ) {
@@ -118,7 +117,11 @@ fun PantallaListado(
 fun GreetingPreview() {
     SeeShowTheme {
         Surface {
-            PantallaListado()
+            PantallaListado(
+                serieId = TODO(),
+                modifier = TODO(),
+                viewModel = TODO()
+            )
         }
     }
 }

@@ -30,7 +30,7 @@ import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
 
 @Composable
 fun PantallaDetalle(
-    serieId: String,
+    serieId: Int,
     onRelacionadoClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PantallaDetalleVM = viewModel()
@@ -111,7 +111,12 @@ fun PantallaDetallePreview() {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(16.dp)
             ) {
-                PantallaDetalle()
+                PantallaDetalle(
+                    serieId = TODO(),
+                    onRelacionadoClick = TODO(),
+                    modifier = TODO(),
+                    viewModel = TODO()
+                )
             }
 
         }

@@ -23,9 +23,9 @@ class PantallaDetalleVM : ViewModel() {
 
     fun cargarSerie(serieId: Int) {
 
-       _uiState.update {
-          it.copy(serie = seriePorId(serieId))
-       }
+       //_uiState.update {
+       //   it.copy(serie = seriePorId(serieId))
+       //}
     }
 }
 

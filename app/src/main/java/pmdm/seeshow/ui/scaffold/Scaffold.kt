@@ -270,7 +270,11 @@ fun AppScaffold() {
             ) {
 
                 when (pantallaSeleccionada) {
-                    0 -> PantallaListado()
+                    0 -> PantallaListado(
+                        serieId = TODO(),
+                        modifier = TODO(),
+                        viewModel = TODO()
+                    )
                     1 -> Text("Series")
                     2 -> Text("Crear")
                     3 -> Text("Foros")
