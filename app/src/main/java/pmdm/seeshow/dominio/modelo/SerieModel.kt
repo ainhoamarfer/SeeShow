@@ -1,7 +1,5 @@
 package pmdm.seeshow.dominio.modelo
 
-import java.util.UUID
-
 data class Serie(
     val id: Int,
     val titulo: String,
@@ -12,7 +10,6 @@ data class Serie(
     val dirigidaPor: String,
     val descripcion: String,
     val plataforma: String,
-    val plataformaOriginal: Boolean,
     val puntuacion: Double,
     val porcentajeCompletada: Int,
     val numeroTemporadas: Int,
