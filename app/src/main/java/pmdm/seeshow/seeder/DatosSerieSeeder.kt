@@ -12,7 +12,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "The Office",
             subtitulo = "T9 · 201 Caps",
             puntuacion = "4.8",
-            porcentajeCompletada = "90%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -21,7 +20,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Narcos",
             subtitulo = "T3 · 30 Caps",
             puntuacion = "4.7",
-            porcentajeCompletada = "50%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -30,7 +28,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -39,7 +36,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Breaking Bad",
             subtitulo = "T5 · 62 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "80%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -48,7 +44,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -57,7 +52,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -66,7 +60,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -75,7 +68,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -84,7 +76,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -93,7 +84,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -102,7 +92,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -111,7 +100,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         ),
         DatosSerieListadoCard(
@@ -120,7 +108,6 @@ fun datosSerie(): List<DatosSerieListadoCard> {
             titulo = "Friends",
             subtitulo = "T10 · 236 Caps",
             puntuacion = "4.9",
-            porcentajeCompletada = "100%",
             tipo = TipoSerieCard.VERTICAL
         )
     )

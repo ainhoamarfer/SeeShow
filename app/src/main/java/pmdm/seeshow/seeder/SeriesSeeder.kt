@@ -3,6 +3,8 @@ package pmdm.seeshow.seeder
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import pmdm.seeshow.R
+import pmdm.seeshow.dominio.modelo.Actor
+import pmdm.seeshow.dominio.modelo.Resena
 import pmdm.seeshow.dominio.modelo.Serie
 import pmdm.seeshow.ui.componente.TipoSerieCard
 import kotlin.Double
@@ -13,15 +15,14 @@ import kotlin.Double
         val succession = Serie(
             id = 1,
             titulo = "Succession",
-            imagenPoster = "https://image.tmdb.org/t/p/w500/7HW47XbkNQ5fiwQFYGWdw9gs144.jpg",
-            imagenFondo = "https://image.tmdb.org/t/p/original/8p9E9F0w9yQ2xQ5xQ8xQ8xQ8xQ8.jpg",
+            imagenPoster = R.drawable.succesion,
+            imagenFondo = R.drawable.imagen_cabecera_severance,
             fechaInicio = "2018-06-03",
             creadaPor = "Jesse Armstrong",
             dirigidaPor = "Mark Mylod",
             descripcion = "La familia Roy, propietaria de uno de los mayores conglomerados de medios de comunicación y entretenimiento del mundo, lucha por mantener el control de su imperio empresarial.",
-            plataforma = "Max",
+            plataformas = listOf("Max"),
             puntuacion = 8.9,
-            porcentajeCompletada = 75,
             numeroTemporadas = 4,
             numeroCapitulos = 39,
             resenaPremium = Resena(
@@ -40,15 +41,14 @@ import kotlin.Double
         val theOffice = Serie(
             id = 2,
             titulo = "The Office",
-            imagenPoster = "https://image.tmdb.org/t/p/w500/qWnJzyZhyy74gjpSjIXWmuk0ifX.jpg",
-            imagenFondo = "",
+            imagenPoster = R.drawable.succesion,
+            imagenFondo = R.drawable.imagen_cabecera_severance,
             fechaInicio = "2005-03-24",
             creadaPor = "Greg Daniels",
             dirigidaPor = "Ken Kwapis",
             descripcion = "Una divertida comedia que sigue el día a día de los empleados de una empresa papelera en Scranton, Pensilvania, donde las situaciones absurdas nunca faltan.",
-            plataforma = "Netflix",
+            plataformas = listOf("Netflix"),
             puntuacion = 9.0,
-            porcentajeCompletada = 100,
             numeroTemporadas = 9,
             numeroCapitulos = 201,
             resenaPremium = Resena(
@@ -67,15 +67,14 @@ import kotlin.Double
         val narcos = Serie(
             id = 3,
             titulo = "Narcos",
-            imagenPoster = "https://image.tmdb.org/t/p/w500/rTmal9fDbwh5F0waol2hq35U4ah.jpg",
-            imagenFondo = "",
+            imagenPoster = R.drawable.succesion,
+            imagenFondo = R.drawable.imagen_cabecera_severance,
             fechaInicio = "2015-08-28",
             creadaPor = "Chris Brancato, Carlo Bernard y Doug Miro",
             dirigidaPor = "Andrés Baiz",
             descripcion = "La historia del auge del narcotráfico en Colombia y la lucha de las autoridades por acabar con los grandes cárteles de la droga.",
-            plataforma = "Netflix",
+            plataformas = listOf("Netflix"),
             puntuacion = 8.8,
-            porcentajeCompletada = 45,
             numeroTemporadas = 3,
             numeroCapitulos = 30,
             resenaPremium = Resena(
@@ -92,15 +91,15 @@ import kotlin.Double
 
         // Establecemos las relaciones entre series
         val successionRelacionada = succession.copy(
-            seriesRelacionadas = listOf(theOffice, narcos)
+            seriesRelacionadasIds = listOf("2", "3")
         )
 
         val theOfficeRelacionada = theOffice.copy(
-            seriesRelacionadas = listOf(succession, narcos)
+            seriesRelacionadasIds = listOf("1", "3")
         )
 
         val narcosRelacionada = narcos.copy(
-            seriesRelacionadas = listOf(succession, theOffice)
+            seriesRelacionadasIds = listOf("1", "2")
         )
 
         return listOf(
@@ -109,4 +108,3 @@ import kotlin.Double
             narcosRelacionada
         )
     }
-}

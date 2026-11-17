@@ -1,32 +1,36 @@
 package pmdm.seeshow.dominio.modelo
 
+import androidx.annotation.DrawableRes
+import pmdm.seeshow.ui.componente.DatosSerieListadoCard
+import pmdm.seeshow.ui.componente.TipoSerieCard
+
 data class Serie(
     val id: Int,
     val titulo: String,
-    val imagenPoster: String,
-    val imagenFondo: String,
+    @DrawableRes val imagenPoster: Int,
+    @DrawableRes val imagenFondo: Int,
     val fechaInicio: String,
     val creadaPor: String,
     val dirigidaPor: String,
     val descripcion: String,
-    val plataforma: String,
+    val plataformas: List<String>,
     val puntuacion: Double,
-    val porcentajeCompletada: Int,
+    //val porcentajeCompletada: Int,
     val numeroTemporadas: Int,
     val numeroCapitulos: Int,
     val resenaPremium: Resena? = null,
     val reparto: List<Actor> = emptyList(),
-    val seriesRelacionadas: List<Serie> = emptyList()
-)
+    val seriesRelacionadasIds: List<String> = emptyList() //evitamos tener series anidadas
+) {
+    fun aDatosSerieListadoCard(orientation: TipoSerieCard): DatosSerieListadoCard {
+        return DatosSerieListadoCard(
+            id = id,
+            recursoImagen = imagenPoster,
+            titulo = titulo,
+            subtitulo = "T$numeroTemporadas · $numeroCapitulos Caps",
+            puntuacion = puntuacion.toString(),
+            tipo = orientation,
+        )
+    }
+}
 
-data class Resena(
-    val texto: String,
-    val autor: String
-)
-
-data class Actor(
-    val id: Int,
-    val nombre: String,
-    val personaje: String,
-    val imagen: String
-)

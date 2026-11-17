@@ -41,7 +41,6 @@ data class DatosSerieListadoCard(
     val titulo: String,
     val subtitulo: String,
     val puntuacion: String,
-    val porcentajeCompletada: String,
     val tipo: TipoSerieCard = TipoSerieCard.VERTICAL
 )
 
