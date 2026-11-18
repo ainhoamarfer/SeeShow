@@ -44,20 +44,21 @@ fun PantallaDetalle(
     //    Text(stringResource("La serie no se ha cargado todavía"))
     //}
 
+    val serie = uiState.serie ?: return
+
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
         CabeceraSerieItem(
             data = CabeceraSerieItemData(
                 id = uiState.serie!!.id,
-                //TODO hacerlo asi
-                titulo = stringResource(R.string.titulo_serie_severance),
-                fecha = stringResource(R.string.fecha_severance),
-                creadaPor = stringResource(R.string.creada_por_seve),
-                descripcion = stringResource(R.string.descripcion_seve),
-                plataforma = stringResource(R.string.plataforma_seve),
-                icono = android.R.drawable.ic_menu_camera, // Placeholder
-                imagen = R.drawable.severance,
-                imagenFondo = R.drawable.imagen_cabecera_severance
+                titulo = uiState.serie!!.titulo,
+                fecha = uiState.serie!!.fechaInicio,
+                creadaPor = uiState.serie!!.creadaPor,
+                descripcion = uiState.serie!!.descripcion,
+                plataforma = uiState.serie!!.plataformas.joinToString(", "),
+                icono = android.R.drawable.ic_menu_camera,
+                imagen = uiState.serie!!.imagenPoster,
+                imagenFondo = uiState.serie!!.imagenFondo
             )
         )
 
@@ -76,7 +77,7 @@ fun PantallaDetalle(
             Botones(
                 enum = VarianteBoton.BASICO_INACTIVO,
                 data = BotonData(
-                    id = uiState.serie!!.id, //todo puede ser nulable
+                    id = uiState.serie!!.id,
                     texto = stringResource(R.string.boton_temporada_capitulos),
                     onClic = {}
                 )
@@ -84,16 +85,17 @@ fun PantallaDetalle(
             Botones(
                 enum = VarianteBoton.BASICO_INACTIVO,
                 data = BotonData(
-                    id = 1,
-                    texto = stringResource(R.string.boton_temporada_capitulos),
+                    id = uiState.serie!!.id,
+                    texto = "Reparto",
                     onClic = {}
                 )
             )
+
             Botones(
                 enum = VarianteBoton.BASICO_INACTIVO,
                 data = BotonData(
-                    id = 1,
-                    texto = stringResource(R.string.boton_temporada_capitulos), //TODO aRREGLAR PORQUE SE CORTA
+                    id = uiState.serie!!.id,
+                    texto = "Reseñas",
                     onClic = {}
                 )
             )
