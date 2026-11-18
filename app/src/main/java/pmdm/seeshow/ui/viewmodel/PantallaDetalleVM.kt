@@ -6,27 +6,43 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import pmdm.seeshow.dominio.modelo.Serie
-import pmdm.seeshow.seeder.seriePorId
+import pmdm.seeshow.seeder.datosSerie
+import pmdm.seeshow.seeder.getSerie
 import java.util.UUID
 
 
 
 
 data class DetalleUIState(
-    val serie: Serie
+    val serie: Serie? = null,
+    //val errorMsg: String? = null
 )
 
 class PantallaDetalleVM : ViewModel() {
-    private val _uiState = MutableStateFlow(DetalleUIState(serie = TODO()))
-
+    private val _uiState = MutableStateFlow(DetalleUIState())
     val uiState: StateFlow<DetalleUIState> = _uiState.asStateFlow() //solo se puede consumir (leer)
 
-    fun cargarSerie(serieId: Int) {
+    fun load(id: Int) {
 
-       //_uiState.update {
-       //   it.copy(serie = seriePorId(serieId))
-       //}
+        _uiState.value = _uiState.value.copy(
+            serie = getSerie(id)
+        )
     }
+
+    //fun load(id: Int) {
+    //
+    //        val serie = getSerie(id)
+    //
+    //        _uiState.value = _uiState.value.copy(
+    //            serie = if serie == null {
+    //                _uiState.value = _uiState.value.copy(
+    //                    errorMsg = "No se encontro")
+    //
+    //            } else {
+    //                serie
+    //            }
+    //        )
+    //    }
 }
 
 

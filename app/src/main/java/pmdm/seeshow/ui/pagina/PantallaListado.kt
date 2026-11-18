@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,32 +14,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import pmdm.seeshow.R
-import pmdm.seeshow.seeder.datosSerie
-import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.SerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
 import pmdm.seeshow.ui.theme.SeeShowTheme
-import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
+import pmdm.seeshow.ui.viewmodel.PantallaListadoVM
 
 //TODO HACER LAS MODIFICACIONES DE CARDS HORIZONTAL Y GRANDE
 @Composable
 fun PantallaListado(
     serieId: Int,
     modifier: Modifier = Modifier,
-    viewModel: PantallaDetalleVM = viewModel()
+    viewModel: PantallaListadoVM = viewModel()
 ) {
 
+    //CARGAMOS ESTADO
     val uiState by viewModel.uiState.collectAsState()
 
+    //la funcion load del viewModel siempre tiene que estas rodeado por el LaunchedEffect, para que no se recarguen todos los datos al cambiar de estado
     LaunchedEffect(Unit) {
-        viewModel.cargarSerie(serieId)
+        viewModel.cargarSeries()
     }
 
-    val serie = uiState.serie
 
     //Lista de prueba para la parte de abajo (4 en 4)
-    val listaSeriesRestantes = datosSerie()
+    //val listaSeriesRestantes = datosSerie()
+
+
+    // TODO BARRA BUSQUEDA
+    //value = state.searchText //para que el texto nuevo se sume a lo anterior que ponia
+    //onValueChange = {
+    //    viewModel.onSearchTextChange(it)
+    //}
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -50,22 +54,21 @@ fun PantallaListado(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         //ILA DE ARRIBA, EL SPAN PARA QUE OCUPE 4 HUECOS
-        item(span = { GridItemSpan(4) }) {
+        item(
+            span = { GridItemSpan(4) }
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 //columna izquierda: Tarjeta grande
                 Box(modifier = Modifier.weight(1f)) {
+
+                    val serieGrande = uiState.listaSeries[0]
+
                     SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            id = 1,
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.VERTICAL_GRANDE
+                        datos = serieGrande.aDatosSerieListadoCard(
+                            TipoSerieCard.VERTICAL_GRANDE
                         )
                     )
                 }
@@ -75,26 +78,19 @@ fun PantallaListado(
                     modifier = Modifier.weight(1f), //TODO entender esto
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
+                    val serieHorizontal1 = uiState.listaSeries[1]
+
                     SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            id = 1,
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.HORIZONTAL
+                        datos = serieHorizontal1.aDatosSerieListadoCard(
+                            TipoSerieCard.HORIZONTAL
                         )
                     )
+
+                    val serieHorizontal2 = uiState.listaSeries[2]
+
                     SerieListadoCard(
-                        datos = DatosSerieListadoCard(
-                            id = 1,
-                            recursoImagen = R.drawable.succesion,
-                            titulo = "Succession",
-                            subtitulo = "T3 · 28 Caps",
-                            puntuacion = "4.9",
-                            porcentajeCompletada = "24%",
-                            tipo = TipoSerieCard.HORIZONTAL
+                        datos = serieHorizontal2.aDatosSerieListadoCard(
+                            TipoSerieCard.HORIZONTAL
                         )
                     )
                 }
@@ -102,9 +98,13 @@ fun PantallaListado(
         }
 
         //RESTO DE LA LISTA
-        items(listaSeriesRestantes) { serie ->
+        items(uiState.listaSeries.size) { index ->
+            val current = uiState.listaSeries[index]
+
             SerieListadoCard(
-                datos = serie,
+                datos = current.aDatosSerieListadoCard(
+                    TipoSerieCard.VERTICAL
+                ),
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -118,9 +118,8 @@ fun GreetingPreview() {
     SeeShowTheme {
         Surface {
             PantallaListado(
-                serieId = TODO(),
-                modifier = TODO(),
-                viewModel = TODO()
+                serieId = 1,
+                modifier = Modifier.fillMaxSize()
             )
         }
     }

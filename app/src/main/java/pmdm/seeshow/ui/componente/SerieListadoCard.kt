@@ -66,15 +66,6 @@ fun SerieListadoCard(
                 modifier = Modifier.fillMaxSize()
             )
 
-            //Porcentaje arriba izqu
-            Text(
-                text = datos.porcentajeCompletada,
-                color = Color.White,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(4.dp).align(Alignment.TopStart)
-            )
-
             //Puntuación arriba derecha
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -137,7 +128,6 @@ fun PreviewSerieCardVer() {
                     titulo = stringResource(R.string.titulo_serie_succession),
                     subtitulo = stringResource(R.string.temporada_capitulos),
                     puntuacion = stringResource(R.string.puntuacion),
-                    porcentajeCompletada = stringResource(R.string.porcentaje),
                     tipo = TipoSerieCard.VERTICAL
                 ),
                 modifier = Modifier.padding(16.dp)

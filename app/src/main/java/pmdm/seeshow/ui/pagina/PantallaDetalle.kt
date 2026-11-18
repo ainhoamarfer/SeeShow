@@ -5,14 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,24 +30,26 @@ import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
 @Composable
 fun PantallaDetalle(
     serieId: Int,
-    onRelacionadoClick: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PantallaDetalleVM = viewModel()
+    vm: PantallaDetalleVM = viewModel()
 ) {
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by vm.uiState.collectAsState()
 
-    LaunchedEffect(serieId) {
-        viewModel.cargarSerie(serieId)
+    LaunchedEffect(Unit) {
+        vm.load(serieId)
     }
 
-    val serie = uiState.serie
+    //if (uiState.serie == null){
+    //    Text(stringResource("La serie no se ha cargado todavía"))
+    //}
 
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
         CabeceraSerieItem(
             data = CabeceraSerieItemData(
-                id = 1,
+                id = uiState.serie!!.id,
+                //TODO hacerlo asi
                 titulo = stringResource(R.string.titulo_serie_severance),
                 fecha = stringResource(R.string.fecha_severance),
                 creadaPor = stringResource(R.string.creada_por_seve),
@@ -75,7 +76,7 @@ fun PantallaDetalle(
             Botones(
                 enum = VarianteBoton.BASICO_INACTIVO,
                 data = BotonData(
-                    id = 1,
+                    id = uiState.serie!!.id, //todo puede ser nulable
                     texto = stringResource(R.string.boton_temporada_capitulos),
                     onClic = {}
                 )
@@ -112,10 +113,7 @@ fun PantallaDetallePreview() {
                 modifier = Modifier.fillMaxWidth().padding(16.dp)
             ) {
                 PantallaDetalle(
-                    serieId = TODO(),
-                    onRelacionadoClick = TODO(),
-                    modifier = TODO(),
-                    viewModel = TODO()
+                    serieId = 1
                 )
             }
 

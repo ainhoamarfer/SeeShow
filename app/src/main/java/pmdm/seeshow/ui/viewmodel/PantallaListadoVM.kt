@@ -4,30 +4,54 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import pmdm.seeshow.dominio.modelo.Serie
 import pmdm.seeshow.seeder.datosSerie
+import pmdm.seeshow.seeder.getSeriesFiltradas
 
-
-data class ListadoUIState(
-    val series: List<Serie> = emptyList()
+//hay una unica fuente de verdad, el modelo
+//esta lista no son todos los elementos que hay en la base de datos, son solo los que se muestran
+data class PantallaListadoUIState(
+    val listaSeries: List<Serie> = emptyList(),
+    val searchText: String = "" //para poder usar la search bar
 )
 
 class PantallaListadoVM : ViewModel() {
 
-    private val _uiState = MutableStateFlow(ListadoUIState())
+    private val _uiState = MutableStateFlow(PantallaListadoUIState())
 
-    val uiState: StateFlow<ListadoUIState> = _uiState.asStateFlow()
+    val uiState: StateFlow<PantallaListadoUIState> = _uiState.asStateFlow() //es una versión capada del _uiState
 
     init {
-        cargarSeries()
+        datosSerie()
     }
 
-    private fun cargarSeries() {
-        val lista = datosSerie()
+    //load
+    fun cargarSeries() {
 
-        _uiState.value = ListadoUIState(
-            series = lista
+        _uiState.value = _uiState.value.copy(
+            listaSeries = datosSerie()
+        )
+    }
+
+    //cuando cambie la barra de busqueda
+    fun onSearchTextChange(newText: String){
+
+        _uiState.value = _uiState.value.copy(
+            searchText = newText,
+            listaSeries = getSeriesFiltradas(newText)
         )
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
