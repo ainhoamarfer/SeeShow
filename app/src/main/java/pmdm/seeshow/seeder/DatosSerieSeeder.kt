@@ -10,7 +10,7 @@ import java.util.logging.Filter
 fun datosSerie(): List<Serie> {
     return listOf(
         Serie(
-            id = 1,
+            id = 0,
             titulo = "Succession",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -26,7 +26,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 2,
+            id = 1,
             titulo = "The Office",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -42,7 +42,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 3,
+            id = 2,
             titulo = "Narcos",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -58,7 +58,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 4,
+            id = 3,
             titulo = "Friends",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -74,7 +74,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 5,
+            id = 4,
             titulo = "Breaking Bad",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -90,7 +90,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 6,
+            id = 5,
             titulo = "Stranger Things",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -106,7 +106,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 7,
+            id = 6,
             titulo = "Black Mirror",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -122,7 +122,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 8,
+            id = 7,
             titulo = "The Last of Us",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -138,7 +138,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 9,
+            id = 8,
             titulo = "Dark",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -154,7 +154,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 10,
+            id = 9,
             titulo = "The Boys",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -170,7 +170,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 11,
+            id = 10,
             titulo = "Sherlock",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -186,7 +186,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 12,
+            id = 11,
             titulo = "Peaky Blinders",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
@@ -202,7 +202,7 @@ fun datosSerie(): List<Serie> {
         ),
 
         Serie(
-            id = 13,
+            id = 12,
             titulo = "Game of Thrones",
             imagenPoster = R.drawable.succesion,
             imagenFondo = R.drawable.succesion,
