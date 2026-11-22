@@ -43,7 +43,7 @@ fun MenuDrawer(
     drawerState: DrawerState,
     datos: MenuDrawerData,
     pantallaSeleccionada: Int,
-    onPantallaSeleccionada: (Int) -> Unit,
+    onItemClick: (Int) -> Unit,
     content: @Composable () -> Unit
 ) {
     ModalNavigationDrawer(
@@ -67,7 +67,7 @@ fun MenuDrawer(
                     },
                     selected = pantallaSeleccionada == datos.descubrir.id,
                     onClick = {
-                        onPantallaSeleccionada(datos.descubrir.id)
+                        onItemClick(datos.descubrir.id)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -94,7 +94,7 @@ fun MenuDrawer(
                     },
                     selected = pantallaSeleccionada == datos.series.id,
                     onClick = {
-                        onPantallaSeleccionada(datos.series.id)
+                        onItemClick(datos.descubrir.id)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -121,7 +121,7 @@ fun MenuDrawer(
                     },
                     selected = pantallaSeleccionada == datos.crear.id,
                     onClick = {
-                        onPantallaSeleccionada(datos.crear.id)
+                        onItemClick(datos.descubrir.id)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -148,7 +148,7 @@ fun MenuDrawer(
                     },
                     selected = pantallaSeleccionada == datos.foros.id,
                     onClick = {
-                        onPantallaSeleccionada(datos.foros.id)
+                        onItemClick(datos.descubrir.id)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -175,7 +175,7 @@ fun MenuDrawer(
                     },
                     selected = pantallaSeleccionada == datos.perfil.id,
                     onClick = {
-                        onPantallaSeleccionada(datos.perfil.id)
+                        onItemClick(datos.descubrir.id)
                     },
                     shape = RoundedCornerShape(4.dp),
 

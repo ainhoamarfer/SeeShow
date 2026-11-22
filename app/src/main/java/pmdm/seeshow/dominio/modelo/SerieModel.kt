@@ -29,7 +29,7 @@ data class Serie(
             titulo = titulo,
             subtitulo = "T$numeroTemporadas · $numeroCapitulos Caps",
             puntuacion = puntuacion.toString(),
-            tipo = orientation,
+            tipo = orientation
         )
     }
 }

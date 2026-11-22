@@ -16,18 +16,14 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import pmdm.seeshow.R
 import pmdm.seeshow.ui.theme.*
-
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.rememberCoroutineScope
-
-
 import androidx.compose.foundation.Image
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
-import pmdm.seeshow.ui.pagina.PantallaListado
 import pmdm.seeshow.seeder.obtenerDatos
 
 
@@ -35,7 +31,7 @@ import pmdm.seeshow.seeder.obtenerDatos
 @Composable
 fun AppScaffold(
     pantallaSeleccionada: Int,
-    onPantallaSeleccionada: (Int) -> Unit,
+    onNavegar: (Int) -> Unit,
     content: @Composable () -> Unit
 ) {
 
@@ -44,23 +40,27 @@ fun AppScaffold(
         initialValue = DrawerValue.Closed
     )
 
-    // Control de corrutinas
+    //guarda estado snackbarHost
+    val snackbarHostState = remember { SnackbarHostState() } //TODO para el futuro
+
+    // Control de corrutinas para drawer y snackbarHost
     val scope = rememberCoroutineScope()
 
     // Datos del menú lateral
     val datosMenuDrawer = obtenerDatos()
+
+
 
     //el Drawer envuelve al Scaffold
     MenuDrawer(
         drawerState = drawerState,
         datos = datosMenuDrawer,
         pantallaSeleccionada = pantallaSeleccionada,
-        onPantallaSeleccionada = { pantalla ->
+        onItemClick = { pantalla ->
 
-            // Comunicamos la selección a MainActivity
-            onPantallaSeleccionada(pantalla)
+            onNavegar(pantalla)
 
-            // Cerramos el menú al seleccionar una opción
+            // Cerramos el menú lateral
             scope.launch {
                 drawerState.close()
             }
@@ -68,6 +68,10 @@ fun AppScaffold(
     ) {
 
         Scaffold(
+
+            snackbarHost = {
+                SnackbarHost(hostState = snackbarHostState)
+            },
 
             topBar = {
                 CenterAlignedTopAppBar(
@@ -103,7 +107,7 @@ fun AppScaffold(
                     actions = {
                         IconButton(
                             onClick = {
-                                onPantallaSeleccionada(5)
+                                onNavegar(5)
                             }
                         ) {
                             Icon(
@@ -133,7 +137,7 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 0,
                         onClick = {
-                            onPantallaSeleccionada(0)
+                            onNavegar(0)
                         },
                         icon = {
                             Icon(
@@ -161,7 +165,7 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 1,
                         onClick = {
-                            onPantallaSeleccionada(1)
+                            onNavegar(1)
                         },
                         icon = {
                             Icon(
@@ -189,7 +193,10 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 2,
                         onClick = {
-                            onPantallaSeleccionada(2)
+                            onNavegar(2)
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Nueva serie añadida")
+                            }
                         },
                         icon = {
                             Box(
@@ -213,7 +220,7 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 3,
                         onClick = {
-                            onPantallaSeleccionada(3)
+                            onNavegar(3)
                         },
                         icon = {
                             Icon(
@@ -240,7 +247,7 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 4,
                         onClick = {
-                            onPantallaSeleccionada(4)
+                            onNavegar(4)
                         },
                         icon = {
                             Icon(
@@ -263,7 +270,6 @@ fun AppScaffold(
                             indicatorColor = SurfaceComponent
                         )
                     )
-
                 }
             }
 
@@ -288,13 +294,16 @@ fun AppScaffold(
 fun ScaffoldPreview() {
     SeeShowTheme {
         Surface {
-            AppScaffold( pantallaSeleccionada = 0,
-                onPantallaSeleccionada = {}
-            ) {
-                PantallaListado(
-                    serieId = 1
-                )
-            }
+            AppScaffold(
+                pantallaSeleccionada = 0,
+                onNavegar = {},
+                content = {
+                    Text(
+                        text = "Contenido de la pantalla",
+                        color = TextWhite
+                    )
+                }
+            )
         }
     }
 }

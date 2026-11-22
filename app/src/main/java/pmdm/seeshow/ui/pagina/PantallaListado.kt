@@ -26,7 +26,7 @@ import pmdm.seeshow.ui.viewmodel.PantallaListadoVM
 //TODO HACER LAS MODIFICACIONES DE CARDS HORIZONTAL Y GRANDE
 @Composable
 fun PantallaListado(
-    serieId: Int,
+    onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PantallaListadoVM = viewModel()
 ) {
@@ -41,9 +41,6 @@ fun PantallaListado(
 
     //Lista de prueba para la parte de abajo (4 en 4)
     //val listaSeriesRestantes = datosSerie()
-
-
-
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -85,7 +82,8 @@ fun PantallaListado(
                         SerieListadoCard(
                             datos = serieGrande.aDatosSerieListadoCard(
                                 TipoSerieCard.VERTICAL_GRANDE
-                            )
+                            ),
+                            onCardClick = onCardClick
                         )
                     }
 
@@ -99,7 +97,8 @@ fun PantallaListado(
                         SerieListadoCard(
                             datos = serieHorizontal1.aDatosSerieListadoCard(
                                 TipoSerieCard.HORIZONTAL
-                            )
+                            ),
+                            onCardClick = onCardClick
                         )
 
                         val serieHorizontal2 = uiState.listaSeries[2]
@@ -107,7 +106,8 @@ fun PantallaListado(
                         SerieListadoCard(
                             datos = serieHorizontal2.aDatosSerieListadoCard(
                                 TipoSerieCard.HORIZONTAL
-                            )
+                            ),
+                            onCardClick = onCardClick
                         )
                     }
                 }
@@ -123,7 +123,8 @@ fun PantallaListado(
                 datos = current.aDatosSerieListadoCard(
                     TipoSerieCard.VERTICAL
                 ),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                onCardClick = onCardClick
             )
         }
     }
@@ -140,7 +141,7 @@ fun GreetingPreview() {
             .padding(16.dp),
             color = BackgroundBlack){
             PantallaListado(
-                serieId = 1,
+                onCardClick = {},
                 modifier = Modifier.fillMaxSize()
             )
         }

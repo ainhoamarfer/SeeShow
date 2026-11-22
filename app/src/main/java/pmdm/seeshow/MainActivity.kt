@@ -4,57 +4,63 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import pmdm.seeshow.ui.pagina.PantallaListado
-import pmdm.seeshow.ui.scaffold.AppScaffold
-import pmdm.seeshow.ui.theme.SeeShowTheme
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-
+import androidx.navigation.compose.currentBackStackEntryAsState
+import pmdm.seeshow.ui.theme.SeeShowTheme
+import androidx.navigation.compose.rememberNavController
+import pmdm.seeshow.ui.scaffold.AppNavGraph
+import pmdm.seeshow.ui.scaffold.AppScaffold
+import pmdm.seeshow.ui.scaffold.RutaAjustes
+import pmdm.seeshow.ui.scaffold.RutaCrear
+import pmdm.seeshow.ui.scaffold.RutaForos
+import pmdm.seeshow.ui.scaffold.RutaLista
+import pmdm.seeshow.ui.scaffold.RutaPerfil
+import pmdm.seeshow.ui.scaffold.RutaSeries
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
             SeeShowTheme {
-                // Guardamos qué pantalla está seleccionada
-                var pantallaSeleccionada by rememberSaveable {
-                    mutableIntStateOf(0)
+                val navGraphController = rememberNavController()
+
+                // Obtenemos el destino actual
+                val navBackStackEntry by navGraphController.currentBackStackEntryAsState()
+                val destinoActual = navBackStackEntry?.destination
+
+                // Identificamos la opción seleccionada
+                val pantallaSeleccionada = when (destinoActual?.route) {
+                    RutaLista::class.qualifiedName -> 0
+                    RutaSeries::class.qualifiedName -> 1
+                    RutaCrear::class.qualifiedName -> 2
+                    RutaForos::class.qualifiedName -> 3
+                    RutaPerfil::class.qualifiedName -> 4
+                    RutaAjustes::class.qualifiedName -> 5
+                    else -> -1
                 }
 
-                // Estructura general de la aplicación
+                // Mostramos el Scaffold
                 AppScaffold(
-
                     pantallaSeleccionada = pantallaSeleccionada,
 
-                    onPantallaSeleccionada = { pantalla ->
-                        pantallaSeleccionada = pantalla
+                    onNavegar = { pantalla ->
+                        when (pantalla) {
+                            0 -> navGraphController.navigate(RutaLista)
+                            1 -> navGraphController.navigate(RutaSeries)
+                            2 -> navGraphController.navigate(RutaCrear)
+                            3 -> navGraphController.navigate(RutaForos)
+                            4 -> navGraphController.navigate(RutaPerfil)
+                            5 -> navGraphController.navigate(RutaAjustes)
+                        }
                     }
-
                 ) {
 
-                    // Decidimos qué pantalla mostrar
-                    when (pantallaSeleccionada) {
-
-                        0 -> PantallaListado(
-                            serieId = 1,
-                            modifier = Modifier
-                        )
-
-                        1 -> Text("Pantalla Series")
-
-                        2 -> Text("Pantalla Crear")
-
-                        3 -> Text("Pantalla Foros")
-
-                        4 -> Text("Pantalla Perfil")
-
-                        5 -> Text("Pantalla Ajustes")
-                    }
+                    // Dentro del Scaffold mostramos el NavGraph
+                    AppNavGraph(
+                        navController = navGraphController
+                    )
                 }
             }
         }

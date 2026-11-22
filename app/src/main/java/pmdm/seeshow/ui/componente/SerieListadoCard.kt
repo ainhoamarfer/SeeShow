@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -47,72 +49,90 @@ data class DatosSerieListadoCard(
 @Composable
 fun SerieListadoCard(
     datos: DatosSerieListadoCard,
+    onCardClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
 
-    Column(modifier = modifier.width(datos.tipo.ancho)) {
+    Card(
+        onClick = {
+            onCardClick(datos.id)
+        },
+        modifier = modifier.width(datos.tipo.ancho),
+        shape = RoundedCornerShape(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp
+        )
+    ) {
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(datos.tipo.altoImagen)
-                .clip(RoundedCornerShape(4.dp))
-                .background(MaterialTheme.colorScheme.surfaceVariant)
+        Column(
+            modifier = modifier
         ) {
-            Image(
-                painter = painterResource(id = datos.recursoImagen),
-                contentDescription = datos.titulo,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(datos.tipo.altoImagen)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                Image(
+                    painter = painterResource(id = datos.recursoImagen),
+                    contentDescription = datos.titulo,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+
+                //Puntuación arriba derecha
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .align(Alignment.TopEnd)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape = RoundedCornerShape(4.dp)
+                        )
+                        .padding(horizontal = 4.dp, vertical = 0.dp)
+                ) {
+                    Icon(
+                        //TODO cambiar el check por el corazon, hacer componente por separado porque lo voy a usar mas veces
+                        painter = painterResource(id = R.drawable.check),
+                        contentDescription = "Puntuación",
+                        tint = Color.White,
+                        modifier = Modifier.size(10.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = datos.puntuacion,
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            //TEXTOS DEBAJO DE LA IMAGEN
+            Spacer(modifier = Modifier.height(6.dp))
+
+            Text(
+                text = datos.titulo,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
-            //Puntuación arriba derecha
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .align(Alignment.TopEnd)
-                    .background(
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(4.dp)
-                    )
-                    .padding(horizontal = 4.dp, vertical = 0.dp)
-            ) {
-                Icon(
-                    //TODO cambiar el check por el corazon, hacer componente por separado porque lo voy a usar mas veces
-                    painter = painterResource(id = R.drawable.check),
-                    contentDescription = "Puntuación",
-                    tint = Color.White,
-                    modifier = Modifier.size(10.dp)
-                )
-
-                Spacer(modifier = Modifier.width(2.dp))
-                Text(
-                    text = datos.puntuacion,
-                    color = Color.White,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                text = datos.subtitulo,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                maxLines = 1
+            )
         }
-
-        //TEXTOS DEBAJO DE LA IMAGEN
-        Spacer(modifier = Modifier.height(6.dp))
-
-        Text(
-            text = datos.titulo,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-        Text(
-            text = datos.subtitulo,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            maxLines = 1
-        )
     }
 }
 
