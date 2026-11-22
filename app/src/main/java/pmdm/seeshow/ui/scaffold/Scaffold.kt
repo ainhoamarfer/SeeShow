@@ -19,11 +19,8 @@ import pmdm.seeshow.ui.theme.*
 
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -36,17 +33,17 @@ import pmdm.seeshow.seeder.obtenerDatos
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppScaffold() {
+fun AppScaffold(
+    pantallaSeleccionada: Int,
+    onPantallaSeleccionada: (Int) -> Unit,
+    content: @Composable () -> Unit
+) {
 
     // Estado del menú lateral
     val drawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed
     )
 
-    // Opción seleccionada en la barra inferior
-    var pantallaSeleccionada by remember {
-        mutableIntStateOf(0)
-    }
     // Control de corrutinas
     val scope = rememberCoroutineScope()
 
@@ -60,10 +57,13 @@ fun AppScaffold() {
         pantallaSeleccionada = pantallaSeleccionada,
         onPantallaSeleccionada = { pantalla ->
 
-            pantallaSeleccionada = pantalla
+            // Comunicamos la selección a MainActivity
+            onPantallaSeleccionada(pantalla)
 
             // Cerramos el menú al seleccionar una opción
-            scope.launch { drawerState.close() }
+            scope.launch {
+                drawerState.close()
+            }
         }
     ) {
 
@@ -103,7 +103,7 @@ fun AppScaffold() {
                     actions = {
                         IconButton(
                             onClick = {
-                                pantallaSeleccionada = 5
+                                onPantallaSeleccionada(5)
                             }
                         ) {
                             Icon(
@@ -132,7 +132,9 @@ fun AppScaffold() {
                     //Boton descubrir
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 0,
-                        onClick = { pantallaSeleccionada = 0 },
+                        onClick = {
+                            onPantallaSeleccionada(0)
+                        },
                         icon = {
                             Icon(
                                 painter = painterResource(R.drawable.eye),
@@ -158,7 +160,9 @@ fun AppScaffold() {
                     //Boton series
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 1,
-                        onClick = { pantallaSeleccionada = 1 },
+                        onClick = {
+                            onPantallaSeleccionada(1)
+                        },
                         icon = {
                             Icon(
                                 painter = painterResource(R.drawable.series),
@@ -185,7 +189,7 @@ fun AppScaffold() {
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 2,
                         onClick = {
-                            // TODO Acción de crear
+                            onPantallaSeleccionada(2)
                         },
                         icon = {
                             Box(
@@ -208,7 +212,9 @@ fun AppScaffold() {
 
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 3,
-                        onClick = { pantallaSeleccionada = 3 },
+                        onClick = {
+                            onPantallaSeleccionada(3)
+                        },
                         icon = {
                             Icon(
                                 painter = painterResource(R.drawable.foros),
@@ -233,7 +239,9 @@ fun AppScaffold() {
 
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 4,
-                        onClick = { pantallaSeleccionada = 4 },
+                        onClick = {
+                            onPantallaSeleccionada(4)
+                        },
                         icon = {
                             Icon(
                                 painter = painterResource(R.drawable.usuario),
@@ -265,21 +273,11 @@ fun AppScaffold() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
-
-                when (pantallaSeleccionada) {
-                    0 -> PantallaListado(
-                        serieId = TODO(),
-                        modifier = TODO(),
-                        viewModel = TODO()
-                    )
-                    1 -> Text("Series")
-                    2 -> Text("Crear")
-                    3 -> Text("Foros")
-                    4 -> Text("Perfil")
-                }
+                content()
             }
         }
     }
@@ -290,7 +288,13 @@ fun AppScaffold() {
 fun ScaffoldPreview() {
     SeeShowTheme {
         Surface {
-            AppScaffold()
+            AppScaffold( pantallaSeleccionada = 0,
+                onPantallaSeleccionada = {}
+            ) {
+                PantallaListado(
+                    serieId = 1
+                )
+            }
         }
     }
 }
