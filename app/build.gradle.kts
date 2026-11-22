@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "pmdm.seeshow"
     compileSdk {
-        version = release(37)
+        version = release(37) {
+            minorApiLevel = 1
+        }
     }
 
     defaultConfig {
@@ -36,27 +38,41 @@ android {
 }
 
 dependencies {
+    // Compose BOM
     implementation(platform(libs.androidx.compose.bom))
+
+    // Jetpack Compose
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
+
+    // Core
     implementation(libs.androidx.core.ktx)
+
+    // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.ui)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Coil
     implementation(libs.coil.compose)
+
+    // Iconos
     implementation(libs.androidx.compose.material.icons.core)
 
+    // Corrutinas
+    implementation(libs.kotlinx.coroutines.core)
+
+    // Testing
     testImplementation(libs.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    // Preview y herramientas de Compose
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.kotlinx.coroutines.core)
 }
