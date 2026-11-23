@@ -72,7 +72,8 @@ fun PantallaDetalle(
             // Flecha para volver
             item {
                 IconButton(
-                    onClick = { onGoBack() },
+                    onClick = {
+                        onGoBack() }, //cosa del navgraph
                     modifier = Modifier
                         .padding(10.dp)
                         .size(30.dp)

@@ -23,8 +23,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            val navGraphController = rememberNavController()
+
             SeeShowTheme {
-                val navGraphController = rememberNavController()
+
 
                 // Obtenemos el destino actual
                 val navBackStackEntry by navGraphController.currentBackStackEntryAsState()
@@ -58,9 +60,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     // Dentro del Scaffold mostramos el NavGraph
-                    AppNavGraph(
-                        navController = navGraphController
-                    )
+                    AppNavGraph(navGraphController)
                 }
             }
         }

@@ -20,7 +20,6 @@ data class DetalleUIState(
     //val errorMsg: String? = null
     val actores: List<DatosSerieListadoCard> = emptyList(),
     val seriesRelacionadas: List<Serie> = emptyList()
-
 )
 
 class PantallaDetalleVM : ViewModel() {
