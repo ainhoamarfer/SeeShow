@@ -29,7 +29,7 @@ class PantallaListadoVM : ViewModel() {
     fun cargarSeries() {
 
         _uiState.value = _uiState.value.copy(
-            listaSeries = datosSerie()
+            listaSeries = getSeriesFiltradas(_uiState.value.searchText)
         )
     }
 

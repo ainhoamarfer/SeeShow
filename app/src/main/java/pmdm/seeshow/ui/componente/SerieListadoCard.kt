@@ -26,6 +26,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import pmdm.seeshow.R
+import pmdm.seeshow.ui.theme.BackgroundBlack
 
 //Variantes
 enum class TipoSerieCard(
@@ -57,7 +58,7 @@ fun SerieListadoCard(
         onClick = {
             onCardClick(datos.id)
         },
-        modifier = modifier.width(datos.tipo.ancho),
+        modifier = modifier.width(datos.tipo.ancho).fillMaxWidth(),
         shape = RoundedCornerShape(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
@@ -68,7 +69,7 @@ fun SerieListadoCard(
     ) {
 
         Column(
-            modifier = modifier
+            modifier = Modifier.fillMaxWidth()
         ) {
 
             Box(
@@ -98,8 +99,7 @@ fun SerieListadoCard(
                         .padding(horizontal = 4.dp, vertical = 0.dp)
                 ) {
                     Icon(
-                        //TODO cambiar el check por el corazon, hacer componente por separado porque lo voy a usar mas veces
-                        painter = painterResource(id = R.drawable.check),
+                        painter = painterResource(id = R.drawable.star_rellena),
                         contentDescription = "Puntuación",
                         tint = Color.White,
                         modifier = Modifier.size(10.dp)
@@ -123,7 +123,8 @@ fun SerieListadoCard(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+
             )
 
             Text(

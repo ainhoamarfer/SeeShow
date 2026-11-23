@@ -47,7 +47,10 @@ fun AppNavGraph(
         composable<RutaDetalle> {
             val rutaDetalle = it.toRoute<RutaDetalle>()   // leer los parámetros
             PantallaDetalle(
-                serieId = rutaDetalle.id
+                serieId = rutaDetalle.id,
+                onGoBack = {
+                    navController.popBackStack()
+                }
             )
         }
 

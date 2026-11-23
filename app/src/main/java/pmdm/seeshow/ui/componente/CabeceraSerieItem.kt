@@ -77,8 +77,7 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
         )
 
         Icon(
-            //TODO cambiar el check
-            painter = painterResource(id = R.drawable.check),
+            painter = painterResource(id = R.drawable.bookmark),
             contentDescription = "Guardar",
             tint = BackgroundBlack,
             modifier = Modifier
