@@ -2,12 +2,18 @@ package pmdm.seeshow.ui.pagina
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
@@ -25,18 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pmdm.seeshow.R
 import pmdm.seeshow.seeder.obtenerEpisodiosPorTemporada
-import pmdm.seeshow.ui.componente.BotonData
-import pmdm.seeshow.ui.componente.Botones
-import pmdm.seeshow.ui.componente.CabeceraSerieItem
-import pmdm.seeshow.ui.componente.CabeceraSerieItemData
-import pmdm.seeshow.ui.componente.DesplegableTemporadasEpisodios
-import pmdm.seeshow.ui.componente.DesplegableTemporadasEpisodiosData
-import pmdm.seeshow.ui.componente.ResenaPremium
-import pmdm.seeshow.ui.componente.ResenaPremiumData
-import pmdm.seeshow.ui.componente.TituloSeccion
-import pmdm.seeshow.ui.componente.TituloSeccionData
-import pmdm.seeshow.ui.componente.VarianteBoton
-import pmdm.seeshow.ui.theme.BackgroundBlack
+import pmdm.seeshow.ui.componente.*
 import pmdm.seeshow.ui.theme.SeeShowTheme
 import pmdm.seeshow.ui.theme.TextWhite
 import pmdm.seeshow.ui.viewmodel.PantallaDetalleVM
@@ -68,7 +63,10 @@ fun PantallaDetalle(
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(
+                bottom = 80.dp
+            )
         ) {
 
             // Flecha para volver
@@ -153,6 +151,8 @@ fun PantallaDetalle(
                     )
                 )
             }
+
+            //Reparto
             item {
                 TituloSeccion(
                     datos = TituloSeccionData(
@@ -161,6 +161,52 @@ fun PantallaDetalle(
                         onClick = {}
                     )
                 )
+            }
+
+            item {
+                val actores = uiState.actores
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp)
+                ) {
+                    items(actores) { actor ->
+                        SerieListadoCard(
+                            datos = actor
+                        )
+                    }
+                }
+            }
+
+            //Relacionados
+            item {
+                TituloSeccion(
+                    datos = TituloSeccionData(
+                        tituloSeccion = "También te puede gustar",
+                        textoBotonDerecha = "Ver todo",
+                        onClick = {}
+                    )
+                )
+            }
+
+            item {
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp)
+                ) {
+                    items(uiState.seriesRelacionadas) { serie ->
+                        SerieListadoCard(
+                            datos = DatosSerieListadoCard(
+                                id = serie.id,
+                                recursoImagen = serie.imagenPoster,
+                                titulo = serie.titulo,
+                                subtitulo = serie.creadaPor,
+                                puntuacion = serie.puntuacion.toString(),
+                                tipo = TipoSerieCard.VERTICAL
+                            )
+                        )
+                    }
+                }
             }
         }
     }

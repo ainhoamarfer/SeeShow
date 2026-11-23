@@ -89,7 +89,7 @@ fun PantallaListado(
 
                     //columna derecha: dos horizontales
                     Column(
-                        modifier = Modifier.weight(1f), //TODO entender esto
+                        modifier = Modifier.weight(1f),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         val serieHorizontal1 = uiState.listaSeries[1]

@@ -43,7 +43,7 @@ data class DatosSerieListadoCard(
     val recursoImagen: Int,
     val titulo: String,
     val subtitulo: String,
-    val puntuacion: String,
+    val puntuacion: String? = null,
     val tipo: TipoSerieCard = TipoSerieCard.VERTICAL
 )
 
@@ -87,31 +87,34 @@ fun SerieListadoCard(
                 )
 
                 //Puntuación arriba derecha
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.TopEnd)
-                        .background(
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = RoundedCornerShape(4.dp)
+                if (datos.puntuacion != null) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .align(Alignment.TopEnd)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(4.dp)
+                            )
+                            .padding(horizontal = 4.dp, vertical = 0.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.star_rellena),
+                            contentDescription = "Puntuación",
+                            tint = Color.White,
+                            modifier = Modifier.size(10.dp)
                         )
-                        .padding(horizontal = 4.dp, vertical = 0.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.star_rellena),
-                        contentDescription = "Puntuación",
-                        tint = Color.White,
-                        modifier = Modifier.size(10.dp)
-                    )
 
-                    Spacer(modifier = Modifier.width(2.dp))
-                    Text(
-                        text = datos.puntuacion,
-                        color = Color.White,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                        Spacer(modifier = Modifier.width(2.dp))
+
+                        Text(
+                            text = datos.puntuacion,
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
             }
 

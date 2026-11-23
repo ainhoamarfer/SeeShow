@@ -30,11 +30,11 @@ import kotlin.Double
                 autor = "SeeShow"
             ),
             reparto = listOf(
-                Actor(1, "Brian Cox", "Logan Roy", ""),
-                Actor(2, "Jeremy Strong", "Kendall Roy", ""),
-                Actor(3, "Sarah Snook", "Shiv Roy", ""),
-                Actor(4, "Kieran Culkin", "Roman Roy", ""),
-                Actor(5, "Matthew Macfadyen", "Tom Wambsgans", "")
+                Actor(1, "Brian Cox", "Logan Roy", R.drawable.britt_lower),
+                Actor(2, "Jeremy Strong", "Kendall Roy", R.drawable.britt_lower),
+                Actor(3, "Sarah Snook", "Shiv Roy", R.drawable.britt_lower),
+                Actor(4, "Kieran Culkin", "Roman Roy", R.drawable.britt_lower),
+                Actor(5, "Matthew Macfadyen", "Tom Wambsgans", R.drawable.britt_lower)
             )
         )
 
@@ -56,11 +56,11 @@ import kotlin.Double
                 autor = "SeeShow"
             ),
             reparto = listOf(
-                Actor(6, "Steve Carell", "Michael Scott", ""),
-                Actor(7, "John Krasinski", "Jim Halpert", ""),
-                Actor(8, "Jenna Fischer", "Pam Beesly", ""),
-                Actor(9, "Rainn Wilson", "Dwight Schrute", ""),
-                Actor(10, "Mindy Kaling", "Kelly Kapoor", "")
+                Actor(1, "Brian Cox", "Logan Roy", R.drawable.britt_lower),
+                Actor(2, "Jeremy Strong", "Kendall Roy", R.drawable.britt_lower),
+                Actor(3, "Sarah Snook", "Shiv Roy", R.drawable.britt_lower),
+                Actor(4, "Kieran Culkin", "Roman Roy", R.drawable.britt_lower),
+                Actor(5, "Matthew Macfadyen", "Tom Wambsgans", R.drawable.britt_lower)
             )
         )
 
@@ -82,10 +82,11 @@ import kotlin.Double
                 autor = "SeeShow"
             ),
             reparto = listOf(
-                Actor(11, "Wagner Moura", "Pablo Escobar", ""),
-                Actor(12, "Boyd Holbrook", "Steve Murphy", ""),
-                Actor(13, "Pedro Pascal", "Javier Peña", ""),
-                Actor(14, "Paulina Gaitán", "Tata Escobar", "")
+                Actor(1, "Brian Cox", "Logan Roy", R.drawable.britt_lower),
+                Actor(2, "Jeremy Strong", "Kendall Roy", R.drawable.britt_lower),
+                Actor(3, "Sarah Snook", "Shiv Roy", R.drawable.britt_lower),
+                Actor(4, "Kieran Culkin", "Roman Roy", R.drawable.britt_lower),
+                Actor(5, "Matthew Macfadyen", "Tom Wambsgans", R.drawable.britt_lower)
             )
         )
 
