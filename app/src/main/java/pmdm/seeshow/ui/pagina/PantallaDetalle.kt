@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
@@ -23,12 +24,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pmdm.seeshow.R
+import pmdm.seeshow.seeder.obtenerEpisodiosPorTemporada
 import pmdm.seeshow.ui.componente.BotonData
 import pmdm.seeshow.ui.componente.Botones
 import pmdm.seeshow.ui.componente.CabeceraSerieItem
 import pmdm.seeshow.ui.componente.CabeceraSerieItemData
+import pmdm.seeshow.ui.componente.DesplegableTemporadasEpisodios
+import pmdm.seeshow.ui.componente.DesplegableTemporadasEpisodiosData
 import pmdm.seeshow.ui.componente.ResenaPremium
 import pmdm.seeshow.ui.componente.ResenaPremiumData
+import pmdm.seeshow.ui.componente.TituloSeccion
+import pmdm.seeshow.ui.componente.TituloSeccionData
 import pmdm.seeshow.ui.componente.VarianteBoton
 import pmdm.seeshow.ui.theme.BackgroundBlack
 import pmdm.seeshow.ui.theme.SeeShowTheme
@@ -60,81 +66,102 @@ fun PantallaDetalle(
 
     } else {
 
-        IconButton(
-            onClick = { onGoBack() },
-            modifier = Modifier
-                .padding(10.dp)
-                .size(30.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.arrow_left),
-                contentDescription = "Volver",
-                tint = TextWhite
-            )
-        }
-
-        Column(
-            modifier = Modifier.fillMaxWidth(),
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
-            CabeceraSerieItem(
-                data = CabeceraSerieItemData(
-                    id = uiState.serie!!.id,
-                    titulo = uiState.serie!!.titulo,
-                    fecha = uiState.serie!!.fechaInicio,
-                    creadaPor = uiState.serie!!.creadaPor,
-                    descripcion = uiState.serie!!.descripcion,
-                    plataforma = uiState.serie!!.plataformas.joinToString(", "),
-                    icono = android.R.drawable.ic_menu_camera,
-                    imagen = uiState.serie!!.imagenPoster,
-                    imagenFondo = uiState.serie!!.imagenFondo
-                )
-            )
-
-            ResenaPremium(
-                data = ResenaPremiumData(
-                    resena = stringResource(R.string.resena_ejemplo),
-                    autor = stringResource(R.string.resena_autor),
-                )
-            )
-
-            //Botonera
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Botones(
-                    enum = VarianteBoton.BASICO_INACTIVO,
-                    data = BotonData(
-                        id = uiState.serie!!.id,
-                        texto = stringResource(R.string.boton_temporada_capitulos),
-                        onClic = {}
+            // Flecha para volver
+            item {
+                IconButton(
+                    onClick = { onGoBack() },
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .size(30.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.arrow_left),
+                        contentDescription = "Volver",
+                        tint = TextWhite
                     )
-                )
-                Botones(
-                    enum = VarianteBoton.BASICO_INACTIVO,
-                    data = BotonData(
-                        id = uiState.serie!!.id,
-                        texto = "Reparto",
-                        onClic = {}
-                    )
-                )
+                }
+            }
 
-                Botones(
-                    enum = VarianteBoton.BASICO_INACTIVO,
-                    data = BotonData(
+
+            item {
+                CabeceraSerieItem(
+                    data = CabeceraSerieItemData(
                         id = uiState.serie!!.id,
-                        texto = "Reseñas",
-                        onClic = {}
+                        titulo = uiState.serie!!.titulo,
+                        fecha = uiState.serie!!.fechaInicio,
+                        creadaPor = uiState.serie!!.creadaPor,
+                        descripcion = uiState.serie!!.descripcion,
+                        plataforma = uiState.serie!!.plataformas.joinToString(", "),
+                        icono = android.R.drawable.ic_menu_camera,
+                        imagen = uiState.serie!!.imagenPoster,
+                        imagenFondo = uiState.serie!!.imagenFondo
                     )
                 )
             }
 
+            item {
+                ResenaPremium(
+                    data = ResenaPremiumData(
+                        resena = stringResource(R.string.resena_ejemplo),
+                        autor = stringResource(R.string.resena_autor)
+                    )
+                )
+            }
 
+            //Botonera
+            //Row(
+            //    modifier = Modifier.fillMaxWidth(),
+            //    horizontalArrangement = Arrangement.spacedBy(12.dp)
+            //) {
+            //    Botones(
+            //        enum = VarianteBoton.BASICO_INACTIVO,
+            //        data = BotonData(
+            //            id = uiState.serie!!.id,
+            //            texto = stringResource(R.string.boton_temporada_capitulos),
+            //            onClic = {}
+            //        )
+            //    )
+            //    Botones(
+            //        enum = VarianteBoton.BASICO_INACTIVO,
+            //        data = BotonData(
+            //            id = uiState.serie!!.id,
+            //            texto = "Reparto",
+            //            onClic = {}
+            //        )
+            //    )
+//
+            //    Botones(
+            //        enum = VarianteBoton.BASICO_INACTIVO,
+            //        data = BotonData(
+            //            id = uiState.serie!!.id,
+            //            texto = "Reseñas",
+            //            onClic = {}
+            //        )
+            //    )
+            //}
 
-
-
+            item {
+                DesplegableTemporadasEpisodios(
+                    data = DesplegableTemporadasEpisodiosData(
+                        temporadas = listOf("T1", "T2", "T3"),
+                        episodiosPorTemporada = obtenerEpisodiosPorTemporada()
+                    )
+                )
+            }
+            item {
+                TituloSeccion(
+                    datos = TituloSeccionData(
+                        tituloSeccion = "Reparto",
+                        textoBotonDerecha = "Ver todo",
+                        onClick = {}
+                    )
+                )
+            }
         }
     }
 }

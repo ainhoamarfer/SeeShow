@@ -70,7 +70,7 @@ fun DesplegableTemporadasEpisodios(
         if (data.desplegado) {
             episodiosAMostrar.chunked(6).forEach { filaDeEpisodios ->
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 65.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -78,7 +78,7 @@ fun DesplegableTemporadasEpisodios(
                     filaDeEpisodios.forEach { episodio ->
                         BotonEpisodioPuntuacion(
                             data = episodio,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).aspectRatio(0.90f)
                         )
                     }
 
