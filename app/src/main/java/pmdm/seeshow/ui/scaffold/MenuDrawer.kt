@@ -42,7 +42,6 @@ data class MenuDrawerData(
 fun MenuDrawer(
     drawerState: DrawerState,
     datos: MenuDrawerData,
-    pantallaSeleccionada: Int,
     onItemClick: (Int) -> Unit,
     content: @Composable () -> Unit
 ) {

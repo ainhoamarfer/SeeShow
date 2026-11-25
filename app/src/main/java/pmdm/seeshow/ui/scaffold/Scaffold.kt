@@ -24,14 +24,26 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
+import kotlinx.coroutines.selects.select
 import pmdm.seeshow.seeder.obtenerDatos
 
 
+enum class lastSelectedItem(){
+    DESCUBRIR,
+    SERIES,
+    FOROS,
+    PERFILES,
+    AJUSTES
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
-    pantallaSeleccionada: Int,
-    onNavegar: (Int) -> Unit,
+    onHomeClick: () -> Unit,
+    onSeriesClick: () -> Unit,
+    onCrearClick: () -> Unit,
+    onForosClick: () -> Unit,
+    onPerfilClick: () -> Unit,
+    onAjustesClick: () -> Unit,
     content: @Composable () -> Unit
 ) {
 
@@ -49,13 +61,10 @@ fun AppScaffold(
     // Datos del menú lateral
     val datosMenuDrawer = obtenerDatos()
 
-
-
     //el Drawer envuelve al Scaffold
     MenuDrawer(
         drawerState = drawerState,
         datos = datosMenuDrawer,
-        pantallaSeleccionada = pantallaSeleccionada,
         onItemClick = { pantalla ->
 
             onNavegar(pantalla)
@@ -107,7 +116,7 @@ fun AppScaffold(
                     actions = {
                         IconButton(
                             onClick = {
-                                onNavegar(5)
+                                onAjustesClick()
                             }
                         ) {
                             Icon(
@@ -129,15 +138,22 @@ fun AppScaffold(
                 )
             },
 
+
+
             // Barra inferior
             bottomBar = {
+
+                var lastSelectedItem = lastSelectedItem.DESCUBRIR
+
                 NavigationBar {
 
                     //Boton descubrir
                     NavigationBarItem(
-                        selected = pantallaSeleccionada == 0,
+                        selected = lastSelectedItem,
+
                         onClick = {
-                            onNavegar(0)
+                            onHomeClick()
+                            lastSelectedItem = lastSelectedItem.DESCUBRIR
                         },
                         icon = {
                             Icon(
@@ -163,9 +179,10 @@ fun AppScaffold(
 
                     //Boton series
                     NavigationBarItem(
-                        selected = pantallaSeleccionada == 1,
+                        selected = lastSelectedItem == "series",
                         onClick = {
-                            onNavegar(1)
+                            onSeriesClick()
+                            lastSelectedItem = "series"
                         },
                         icon = {
                             Icon(
@@ -191,9 +208,8 @@ fun AppScaffold(
 
                     //Botn central crear
                     NavigationBarItem(
-                        selected = pantallaSeleccionada == 2,
                         onClick = {
-                            onNavegar(2)
+                            onCrearClick()
                             scope.launch {
                                 snackbarHostState.showSnackbar("Nueva serie añadida")
                             }
@@ -218,9 +234,8 @@ fun AppScaffold(
                     )
 
                     NavigationBarItem(
-                        selected = pantallaSeleccionada == 3,
                         onClick = {
-                            onNavegar(3)
+                            onForosClick()
                         },
                         icon = {
                             Icon(
@@ -247,7 +262,7 @@ fun AppScaffold(
                     NavigationBarItem(
                         selected = pantallaSeleccionada == 4,
                         onClick = {
-                            onNavegar(4)
+                            onPerfilClick()
                         },
                         icon = {
                             Icon(
@@ -297,13 +312,12 @@ fun ScaffoldPreview() {
             AppScaffold(
                 pantallaSeleccionada = 0,
                 onNavegar = {},
-                content = {
-                    Text(
-                        text = "Contenido de la pantalla",
-                        color = TextWhite
-                    )
-                }
-            )
+            ) {
+                Text(
+                    text = "Contenido de la pantalla",
+                    color = TextWhite
+                )
+            }
         }
     }
 }

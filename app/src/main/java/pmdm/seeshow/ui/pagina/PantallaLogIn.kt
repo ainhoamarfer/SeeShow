@@ -72,15 +72,16 @@ fun PantallaLogIn (
             expanded = state.expanded,
             onExpandedChange = {vm.onExpandedChange(it)}
         ) {
-            OutlinedTextField(
-                value = state.email
-                onValueChange = {},
-                label = { Text("Email") },
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(state.expanded) },
-                modifier = Modifier
-                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
-            )
+            //TODO VER ESTO
+            //OutlinedTextField(
+            //    value = state.email,
+            //    //onValueChange = {},
+            //    label =  Text("Email") ,
+            //    readOnly = true,
+            //    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(state.expanded) },
+            //    modifier = Modifier
+            //        .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+            //)
 
         }
 
