@@ -3,38 +3,38 @@ package pmdm.seeshow.seeder
 import pmdm.seeshow.R
 import pmdm.seeshow.ui.scaffold.MenuDrawerData
 import pmdm.seeshow.ui.scaffold.OpcionDrawer
+import pmdm.seeshow.ui.scaffold.UltimaPantallaSeleccionada
 
 fun obtenerDatos(): MenuDrawerData {
-
     return MenuDrawerData(
         descubrir = OpcionDrawer(
             titulo = R.string.descubrir,
             icono = R.drawable.eye,
-            id = 0
+            pantalla = UltimaPantallaSeleccionada.DESCUBRIR
         ),
 
         series = OpcionDrawer(
             titulo = R.string.series,
             icono = R.drawable.series,
-            id = 1
+            pantalla = UltimaPantallaSeleccionada.SERIES
         ),
 
         crear = OpcionDrawer(
             titulo = R.string.crear,
             icono = R.drawable.crear,
-            id = 2
+            pantalla = UltimaPantallaSeleccionada.CREAR
         ),
 
         foros = OpcionDrawer(
             titulo = R.string.foros,
             icono = R.drawable.foros,
-            id = 3
+            pantalla = UltimaPantallaSeleccionada.FOROS
         ),
 
         perfil = OpcionDrawer(
             titulo = R.string.perfil,
             icono = R.drawable.usuario,
-            id = 4
+            pantalla = UltimaPantallaSeleccionada.PERFILES
         )
     )
 }

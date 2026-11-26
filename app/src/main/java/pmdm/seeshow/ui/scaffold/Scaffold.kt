@@ -24,17 +24,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
-import kotlinx.coroutines.selects.select
 import pmdm.seeshow.seeder.obtenerDatos
-
-
-enum class lastSelectedItem(){
-    DESCUBRIR,
-    SERIES,
-    FOROS,
-    PERFILES,
-    AJUSTES
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
@@ -61,13 +51,25 @@ fun AppScaffold(
     // Datos del menú lateral
     val datosMenuDrawer = obtenerDatos()
 
+    //para actualizar la pagina
+    var ultimaPantallaSeleccionada by remember {
+        mutableStateOf(UltimaPantallaSeleccionada.DESCUBRIR)
+    }
+
     //el Drawer envuelve al Scaffold
     MenuDrawer(
         drawerState = drawerState,
         datos = datosMenuDrawer,
-        onItemClick = { pantalla ->
+        pantallaSeleccionada = ultimaPantallaSeleccionada,
+        onPantallaSeleccionada = { ultimaPantallaSeleccionada ->
 
-            onNavegar(pantalla)
+            when (ultimaPantallaSeleccionada) {
+                UltimaPantallaSeleccionada.DESCUBRIR -> onHomeClick()
+                UltimaPantallaSeleccionada.SERIES -> onSeriesClick()
+                UltimaPantallaSeleccionada.CREAR -> onCrearClick()
+                UltimaPantallaSeleccionada.FOROS -> onForosClick()
+                UltimaPantallaSeleccionada.PERFILES -> onPerfilClick()
+            }
 
             // Cerramos el menú lateral
             scope.launch {
@@ -143,17 +145,14 @@ fun AppScaffold(
             // Barra inferior
             bottomBar = {
 
-                var lastSelectedItem = lastSelectedItem.DESCUBRIR
-
                 NavigationBar {
 
                     //Boton descubrir
                     NavigationBarItem(
-                        selected = lastSelectedItem,
-
+                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.DESCUBRIR,
                         onClick = {
                             onHomeClick()
-                            lastSelectedItem = lastSelectedItem.DESCUBRIR
+                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.DESCUBRIR
                         },
                         icon = {
                             Icon(
@@ -179,10 +178,10 @@ fun AppScaffold(
 
                     //Boton series
                     NavigationBarItem(
-                        selected = lastSelectedItem == "series",
+                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.SERIES,
                         onClick = {
                             onSeriesClick()
-                            lastSelectedItem = "series"
+                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.SERIES
                         },
                         icon = {
                             Icon(
@@ -208,6 +207,7 @@ fun AppScaffold(
 
                     //Botn central crear
                     NavigationBarItem(
+                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.CREAR,
                         onClick = {
                             onCrearClick()
                             scope.launch {
@@ -234,8 +234,10 @@ fun AppScaffold(
                     )
 
                     NavigationBarItem(
+                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.FOROS,
                         onClick = {
                             onForosClick()
+                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.FOROS
                         },
                         icon = {
                             Icon(
@@ -260,9 +262,10 @@ fun AppScaffold(
                     )
 
                     NavigationBarItem(
-                        selected = pantallaSeleccionada == 4,
+                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.PERFILES,
                         onClick = {
                             onPerfilClick()
+                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.PERFILES
                         },
                         icon = {
                             Icon(
@@ -310,8 +313,12 @@ fun ScaffoldPreview() {
     SeeShowTheme {
         Surface {
             AppScaffold(
-                pantallaSeleccionada = 0,
-                onNavegar = {},
+                onHomeClick = {},
+                onSeriesClick = {},
+                onCrearClick = {},
+                onForosClick = {},
+                onPerfilClick = {},
+                onAjustesClick = {}
             ) {
                 Text(
                     text = "Contenido de la pantalla",

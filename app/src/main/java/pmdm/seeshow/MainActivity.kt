@@ -42,3 +42,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+//TODO se me van creando instancias de MainActivity cuando ejecuto
+//no filtra la search bar
+

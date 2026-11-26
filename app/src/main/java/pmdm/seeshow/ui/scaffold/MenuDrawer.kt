@@ -7,7 +7,6 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
@@ -26,7 +25,7 @@ import pmdm.seeshow.ui.theme.TextWhite
 data class OpcionDrawer(
     val titulo: Int,
     val icono: Int,
-    val id: Int
+    val pantalla: UltimaPantallaSeleccionada
 )
 
 // Datos de todas las opciones del menú
@@ -42,7 +41,8 @@ data class MenuDrawerData(
 fun MenuDrawer(
     drawerState: DrawerState,
     datos: MenuDrawerData,
-    onItemClick: (Int) -> Unit,
+    pantallaSeleccionada: UltimaPantallaSeleccionada,
+    onPantallaSeleccionada: (UltimaPantallaSeleccionada) -> Unit,
     content: @Composable () -> Unit
 ) {
     ModalNavigationDrawer(
@@ -64,9 +64,9 @@ fun MenuDrawer(
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = pantallaSeleccionada == datos.descubrir.id,
+                    selected = pantallaSeleccionada == datos.descubrir.pantalla,
                     onClick = {
-                        onItemClick(datos.descubrir.id)
+                        onPantallaSeleccionada(datos.descubrir.pantalla)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -91,9 +91,9 @@ fun MenuDrawer(
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = pantallaSeleccionada == datos.series.id,
+                    selected = pantallaSeleccionada == datos.series.pantalla,
                     onClick = {
-                        onItemClick(datos.descubrir.id)
+                        onPantallaSeleccionada(datos.series.pantalla)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -118,9 +118,9 @@ fun MenuDrawer(
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = pantallaSeleccionada == datos.crear.id,
+                    selected = pantallaSeleccionada == datos.crear.pantalla,
                     onClick = {
-                        onItemClick(datos.descubrir.id)
+                        onPantallaSeleccionada(datos.crear.pantalla)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -145,9 +145,9 @@ fun MenuDrawer(
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = pantallaSeleccionada == datos.foros.id,
+                    selected = pantallaSeleccionada == datos.foros.pantalla,
                     onClick = {
-                        onItemClick(datos.descubrir.id)
+                        onPantallaSeleccionada(datos.foros.pantalla)
                     },
                     shape = RoundedCornerShape(4.dp),
 
@@ -172,9 +172,9 @@ fun MenuDrawer(
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = pantallaSeleccionada == datos.perfil.id,
+                    selected = pantallaSeleccionada == datos.perfil.pantalla,
                     onClick = {
-                        onItemClick(datos.descubrir.id)
+                        onPantallaSeleccionada(datos.perfil.pantalla)
                     },
                     shape = RoundedCornerShape(4.dp),
 
