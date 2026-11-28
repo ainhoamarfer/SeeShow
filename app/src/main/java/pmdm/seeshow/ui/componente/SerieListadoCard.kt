@@ -26,8 +26,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import pmdm.seeshow.R
-import pmdm.seeshow.ui.theme.BackgroundBlack
-
 //Variantes
 enum class TipoSerieCard(
     val ancho: Dp,
@@ -49,9 +47,9 @@ data class DatosSerieListadoCard(
 
 @Composable
 fun SerieListadoCard(
+    modifier: Modifier = Modifier,
     datos: DatosSerieListadoCard,
     onCardClick: (Int) -> Unit = {},
-    modifier: Modifier = Modifier
 ) {
 
     Card(
@@ -144,7 +142,7 @@ fun SerieListadoCard(
 @Composable
 fun PreviewSerieCardVer() {
     SeeShowTheme {
-        Surface() {
+        Surface {
             SerieListadoCard(
                 datos = DatosSerieListadoCard(
                     id = 1,

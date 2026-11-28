@@ -10,7 +10,8 @@ data class PantallaLogInUIState(
     val contrasena: String = "",
     val errorEmail: String? = null,
     val errorContra: String? = null,
-    val expanded: Boolean = false
+    val expanded: Boolean = false,
+    val tipoUsuario: String = ""
 )
 
 class PantallaLogInVM : ViewModel() {
@@ -33,15 +34,24 @@ class PantallaLogInVM : ViewModel() {
 
         _uiState.value = _uiState.value.copy(contrasena = newText)
 
-        if(_uiState.value.email.isBlank()) {
+        if(_uiState.value.contrasena.isBlank()) {
             _uiState.value = _uiState.value.copy(errorContra = "El email no puede estar vacio")
         }
     }
 
-    //fun isError(): Boolean {
-    // return _uiState.value.error }
+    fun isError(): Boolean {
+        return _uiState.value.errorEmail != null || _uiState.value.errorContra != null
+    }
 
-    fun onExpandedChange(it: Boolean): Unit {
-        _uiState.value = _uiState.value.copy(expanded = it)
+    fun onTipoUsuarioChange(tipo: String) {
+        _uiState.value = _uiState.value.copy(
+            tipoUsuario = tipo
+        )
+    }
+
+    fun onExpandedChange(it: Boolean) {
+        _uiState.value = _uiState.value.copy(
+            expanded = it
+        )
     }
 }

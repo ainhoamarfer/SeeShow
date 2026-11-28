@@ -9,6 +9,7 @@ import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 import pmdm.seeshow.ui.pagina.PantallaDetalle
 import pmdm.seeshow.ui.pagina.PantallaListado
+import pmdm.seeshow.ui.pagina.PantallaLogIn
 
 @Serializable
 data object RutaSeries
@@ -29,6 +30,8 @@ data class RutaDetalle(val id: Int)
 @Serializable
 data object RutaLista
 
+@Serializable
+data object RutaLogin
 
 // las paginas no pueden tener de parametro NavHostController, es un crimen, si cambiases de este sistema a otro tendrias que cambiar todas las paginas
 @Composable
@@ -37,8 +40,21 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = RutaLista
+        startDestination = RutaLogin
     ) {
+
+        composable<RutaLogin> {
+            PantallaLogIn(
+                onLoginCorrecto = {
+                    navController.navigate(RutaLista) {
+                        popUpTo<RutaLogin> {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
         //enganchamos la ruta a la pagina
         composable<RutaLista> {
             PantallaListado(onCardClick = {

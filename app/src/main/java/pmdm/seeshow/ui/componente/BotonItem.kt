@@ -131,11 +131,6 @@ fun Botones(enum: VarianteBoton, data: BotonData, modifier: Modifier = Modifier)
 
 }
 
-data class BotonItem(
-    val variante: VarianteBoton,
-    val data: BotonData
-)
-
     @Preview
     @Composable
     fun BotonPreview(){

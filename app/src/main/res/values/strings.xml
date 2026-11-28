@@ -29,4 +29,23 @@
     <string name="perfil">Perfil</string>
     <string name="crear">Crear</string>
     <string name="guardar">Guardar</string>
+    <string name="reparto">Reparto</string>
+    <string name="tambien_puede_gustar">También te puede gustar</string>
+    <string name="ver_todo">Ver todo</string>
+    <string name="volver">Volver</string>
+    <string name="buscar_series">Buscar series...</string>
+    <string name="logo_seeshow">Logo SeeShow</string>
+    <string name="login">LogIn</string>
+    <string name="frase_registro_1">Por favor, regístrate para continuar</string>
+    <string name="nombre_usuario">Nombre usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="frase_registro_2">"¿Olvidaste tu contraseña? "</string>
+    <string name="clica_aqui">Clica aquí</string>
+    <string name="frase_registro_3">"¿No tienes una cuenta? "</string>
+    <string name="registrate">Regístrate</string>
+    <string name="aquí">" aquí"</string>
+    <string name="email">Email</string>
+    <string name="cargando">Cargando Serie...</string>
+    <string name="borrar">Borrar</string>
+    <string name="buscar">Buscar</string>
 </resources>

@@ -2,9 +2,6 @@ package pmdm.seeshow.seeder
 
 import pmdm.seeshow.R
 import pmdm.seeshow.dominio.modelo.Serie
-import pmdm.seeshow.ui.componente.DatosSerieListadoCard
-import pmdm.seeshow.ui.componente.TipoSerieCard
-import java.util.logging.Filter
 
 
 fun datosSerie(): List<Serie> {
@@ -218,9 +215,6 @@ fun datosSerie(): List<Serie> {
         )
     )
 }
-
-//var series = listOf() y podriamps llamar a esta variable desde otros sitios
-
 fun getSeriesFiltradas(filter: String): List<Serie>{
     return datosSerie().filter { it.titulo.contains(filter) }
 }

@@ -1,10 +1,8 @@
 package pmdm.seeshow.ui.componente
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -34,7 +32,7 @@ data class ResenaPremiumData(
 @Composable
 fun ResenaPremium(data: ResenaPremiumData, modifier: Modifier = Modifier){
 
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxWidth()
         .background(SurfaceComponent)
         .drawBehind {
@@ -72,7 +70,7 @@ fun ResenaPremium(data: ResenaPremiumData, modifier: Modifier = Modifier){
 @Composable
 fun PreviewResenaPremium() {
     SeeShowTheme {
-        Surface() {
+        Surface {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(16.dp)
             ) {

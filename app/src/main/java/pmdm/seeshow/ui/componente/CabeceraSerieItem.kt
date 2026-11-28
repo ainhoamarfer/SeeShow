@@ -47,7 +47,7 @@ data class CabeceraSerieItemData(
 )
 
 @Composable
-fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier) {
+fun CabeceraSerieItem(data: CabeceraSerieItemData) {
 
     Box(
         modifier = Modifier
@@ -146,7 +146,7 @@ fun CabeceraSerieItem(data: CabeceraSerieItemData, modifier: Modifier = Modifier
 @Composable
 fun PreviewCabeceraSerieItem() {
     SeeShowTheme {
-        Surface() {
+        Surface {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(16.dp)
             ) {

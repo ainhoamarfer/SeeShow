@@ -4,7 +4,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -12,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.tooling.preview.Preview
 import pmdm.seeshow.R
@@ -57,7 +56,7 @@ fun BarraBusqueda(
 
         Icon(
             painter = painterResource(id = R.drawable.lupa),
-            contentDescription = "Buscar",
+            contentDescription = stringResource(R.string.buscar),
             tint = PrimaryDark,
             modifier = Modifier.size(20.dp)
         )
@@ -93,7 +92,7 @@ fun BarraBusqueda(
 
             Icon(
                 painter = painterResource(id = R.drawable.x),
-                contentDescription = "Borrar",
+                contentDescription = stringResource(R.string.borrar),
                 tint = TextWhite,
                 modifier = Modifier.size(20.dp)
             )

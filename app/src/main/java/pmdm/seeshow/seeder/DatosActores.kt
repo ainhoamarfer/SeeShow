@@ -2,7 +2,6 @@ package pmdm.seeshow.seeder
 
 import pmdm.seeshow.R
 import pmdm.seeshow.dominio.modelo.Actor
-import pmdm.seeshow.dominio.modelo.Serie
 import pmdm.seeshow.ui.componente.DatosSerieListadoCard
 import pmdm.seeshow.ui.componente.TipoSerieCard
 

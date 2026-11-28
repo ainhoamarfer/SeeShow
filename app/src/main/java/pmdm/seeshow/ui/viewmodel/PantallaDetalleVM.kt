@@ -4,14 +4,11 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import pmdm.seeshow.dominio.modelo.Serie
 import pmdm.seeshow.seeder.datosSerie
 import pmdm.seeshow.seeder.getActoresCard
 import pmdm.seeshow.seeder.getSerie
 import pmdm.seeshow.ui.componente.DatosSerieListadoCard
-import java.util.UUID
-
 
 
 
@@ -39,21 +36,6 @@ class PantallaDetalleVM : ViewModel() {
             seriesRelacionadas = getSeriesRelacionadas()
         )
     }
-
-    //fun load(id: Int) {
-    //
-    //        val serie = getSerie(id)
-    //
-    //        _uiState.value = _uiState.value.copy(
-    //            serie = if serie == null {
-    //                _uiState.value = _uiState.value.copy(
-    //                    errorMsg = "No se encontro")
-    //
-    //            } else {
-    //                serie
-    //            }
-    //        )
-    //    }
 }
 
 

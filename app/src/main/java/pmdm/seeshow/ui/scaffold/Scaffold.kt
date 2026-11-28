@@ -28,6 +28,7 @@ import pmdm.seeshow.seeder.obtenerDatos
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
+    esLogin: Boolean,
     onHomeClick: () -> Unit,
     onSeriesClick: () -> Unit,
     onCrearClick: () -> Unit,
@@ -43,265 +44,271 @@ fun AppScaffold(
     )
 
     //guarda estado snackbarHost
-    val snackbarHostState = remember { SnackbarHostState() } //TODO para el futuro
-
-    // Control de corrutinas para drawer y snackbarHost
-    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     // Datos del menú lateral
     val datosMenuDrawer = obtenerDatos()
+
+    // Control de corrutinas para drawer y snackbarHost
+    val scope = rememberCoroutineScope()
 
     //para actualizar la pagina
     var ultimaPantallaSeleccionada by remember {
         mutableStateOf(UltimaPantallaSeleccionada.DESCUBRIR)
     }
 
-    //el Drawer envuelve al Scaffold
-    MenuDrawer(
-        drawerState = drawerState,
-        datos = datosMenuDrawer,
-        pantallaSeleccionada = ultimaPantallaSeleccionada,
-        onPantallaSeleccionada = { ultimaPantallaSeleccionada ->
+    if (esLogin) {
 
-            when (ultimaPantallaSeleccionada) {
-                UltimaPantallaSeleccionada.DESCUBRIR -> onHomeClick()
-                UltimaPantallaSeleccionada.SERIES -> onSeriesClick()
-                UltimaPantallaSeleccionada.CREAR -> onCrearClick()
-                UltimaPantallaSeleccionada.FOROS -> onForosClick()
-                UltimaPantallaSeleccionada.PERFILES -> onPerfilClick()
+        content()
+
+    } else {
+
+        //el Drawer envuelve al Scaffold
+        MenuDrawer(
+            drawerState = drawerState,
+            datos = datosMenuDrawer,
+            pantallaSeleccionada = ultimaPantallaSeleccionada,
+            onPantallaSeleccionada = { ultimaPantallaSeleccionada ->
+
+                when (ultimaPantallaSeleccionada) {
+                    UltimaPantallaSeleccionada.DESCUBRIR -> onHomeClick()
+                    UltimaPantallaSeleccionada.SERIES -> onSeriesClick()
+                    UltimaPantallaSeleccionada.CREAR -> onCrearClick()
+                    UltimaPantallaSeleccionada.FOROS -> onForosClick()
+                    UltimaPantallaSeleccionada.PERFILES -> onPerfilClick()
+                }
+
+                // Cerramos el menú lateral
+                scope.launch {
+                    drawerState.close()
+                }
             }
+        ) {
 
-            // Cerramos el menú lateral
-            scope.launch {
-                drawerState.close()
-            }
-        }
-    ) {
+            Scaffold(
 
-        Scaffold(
+                snackbarHost = {
+                    SnackbarHost(hostState = snackbarHostState)
+                },
 
-            snackbarHost = {
-                SnackbarHost(hostState = snackbarHostState)
-            },
+                topBar = {
+                    CenterAlignedTopAppBar(
 
-            topBar = {
-                CenterAlignedTopAppBar(
-
-                    //menu hamburguesa
-                    navigationIcon = {
-                        IconButton(
-                            onClick = {
-                                scope.launch {
-                                    drawerState.open()
+                        //menu hamburguesa
+                        navigationIcon = {
+                            IconButton(
+                                onClick = {
+                                    scope.launch {
+                                        drawerState.open()
+                                    }
                                 }
-                            }
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.menu),
-                                contentDescription = "Abrir menú lateral",
-                                tint = TextWhite,
-                                modifier = Modifier.height(30.dp)
-                            )
-                        }
-                    },
-
-                    //Logo centrado
-                    title = {
-                        Image(
-                            painter = painterResource(R.drawable.logo_seeshow),
-                            contentDescription = "SeeShow",
-                            modifier = Modifier.height(32.dp)
-                        )
-                    },
-
-                    // Ajustes
-                    actions = {
-                        IconButton(
-                            onClick = {
-                                onAjustesClick()
-                            }
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ajustes),
-                                contentDescription = "Ajustes",
-                                tint = TextWhite,
-                                modifier = Modifier.height(30.dp)
-                            )
-                        }
-                    },
-
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color.Transparent,
-                        scrolledContainerColor = BackgroundBlack,
-                        navigationIconContentColor = TextWhite,
-                        titleContentColor = TextWhite,
-                        actionIconContentColor = TextWhite
-                    )
-                )
-            },
-
-
-
-            // Barra inferior
-            bottomBar = {
-
-                NavigationBar {
-
-                    //Boton descubrir
-                    NavigationBarItem(
-                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.DESCUBRIR,
-                        onClick = {
-                            onHomeClick()
-                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.DESCUBRIR
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(R.drawable.eye),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.descubrir),
-                                style = AppTypography.labelSmall
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Primary,
-                            unselectedIconColor = TextWhite,
-                            selectedTextColor = Primary,
-                            unselectedTextColor = TextWhite,
-                            indicatorColor = SurfaceComponent
-                        )
-                    )
-
-                    //Boton series
-                    NavigationBarItem(
-                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.SERIES,
-                        onClick = {
-                            onSeriesClick()
-                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.SERIES
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(R.drawable.series),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.series),
-                                style = AppTypography.labelSmall
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Primary,
-                            unselectedIconColor = TextWhite,
-                            selectedTextColor = Primary,
-                            unselectedTextColor = TextWhite,
-                            indicatorColor = SurfaceComponent
-                        )
-                    )
-
-                    //Botn central crear
-                    NavigationBarItem(
-                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.CREAR,
-                        onClick = {
-                            onCrearClick()
-                            scope.launch {
-                                snackbarHostState.showSnackbar("Nueva serie añadida")
-                            }
-                        },
-                        icon = {
-                            Box(
-                                modifier = Modifier
-                                    .size(54.dp)
-                                    .clip(CircleShape)
-                                    .background(Primary),
-                                contentAlignment = Alignment.Center
                             ) {
                                 Icon(
-                                    painter = painterResource(R.drawable.crear),
-                                    contentDescription = "Crear",
-                                    tint = SurfaceComponent,
-                                    modifier = Modifier.size(30.dp)
+                                    painter = painterResource(R.drawable.menu),
+                                    contentDescription = "Abrir menú lateral",
+                                    tint = TextWhite,
+                                    modifier = Modifier.height(30.dp)
                                 )
                             }
                         },
-                        label = null
-                    )
 
-                    NavigationBarItem(
-                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.FOROS,
-                        onClick = {
-                            onForosClick()
-                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.FOROS
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(R.drawable.foros),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp)
+                        //Logo centrado
+                        title = {
+                            Image(
+                                painter = painterResource(R.drawable.logo_seeshow),
+                                contentDescription = "SeeShow",
+                                modifier = Modifier.height(32.dp)
                             )
                         },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.foros),
-                                style = AppTypography.labelSmall
-                            )
+
+                        // Ajustes
+                        actions = {
+                            IconButton(
+                                onClick = {
+                                    onAjustesClick()
+                                }
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.ajustes),
+                                    contentDescription = "Ajustes",
+                                    tint = TextWhite,
+                                    modifier = Modifier.height(30.dp)
+                                )
+                            }
                         },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Primary,
-                            unselectedIconColor = TextWhite,
-                            selectedTextColor = Primary,
-                            unselectedTextColor = TextWhite,
-                            indicatorColor = SurfaceComponent
+
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = Color.Transparent,
+                            scrolledContainerColor = BackgroundBlack,
+                            navigationIconContentColor = TextWhite,
+                            titleContentColor = TextWhite,
+                            actionIconContentColor = TextWhite
                         )
                     )
+                },
 
-                    NavigationBarItem(
-                        selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.PERFILES,
-                        onClick = {
-                            onPerfilClick()
-                            ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.PERFILES
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(R.drawable.usuario),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp)
+
+                // Barra inferior
+                bottomBar = {
+
+                    NavigationBar {
+
+                        //Boton descubrir
+                        NavigationBarItem(
+                            selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.DESCUBRIR,
+                            onClick = {
+                                onHomeClick()
+                                ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.DESCUBRIR
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.eye),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = stringResource(R.string.descubrir),
+                                    style = AppTypography.labelSmall
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Primary,
+                                unselectedIconColor = TextWhite,
+                                selectedTextColor = Primary,
+                                unselectedTextColor = TextWhite,
+                                indicatorColor = SurfaceComponent
                             )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.perfil),
-                                style = AppTypography.labelSmall
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Primary,
-                            unselectedIconColor = TextWhite,
-                            selectedTextColor = Primary,
-                            unselectedTextColor = TextWhite,
-                            indicatorColor = SurfaceComponent
                         )
-                    )
+
+                        //Boton series
+                        NavigationBarItem(
+                            selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.SERIES,
+                            onClick = {
+                                onSeriesClick()
+                                ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.SERIES
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.series),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = stringResource(R.string.series),
+                                    style = AppTypography.labelSmall
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Primary,
+                                unselectedIconColor = TextWhite,
+                                selectedTextColor = Primary,
+                                unselectedTextColor = TextWhite,
+                                indicatorColor = SurfaceComponent
+                            )
+                        )
+
+                        //Botn central crear
+                        NavigationBarItem(
+                            selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.CREAR,
+                            onClick = {
+                                onCrearClick()
+                                scope.launch {
+                                    snackbarHostState.showSnackbar("Nueva serie añadida")
+                                }
+                            },
+                            icon = {
+                                Box(
+                                    modifier = Modifier
+                                        .size(54.dp)
+                                        .clip(CircleShape)
+                                        .background(Primary),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.crear),
+                                        contentDescription = "Crear",
+                                        tint = SurfaceComponent,
+                                        modifier = Modifier.size(30.dp)
+                                    )
+                                }
+                            },
+                            label = null
+                        )
+
+                        NavigationBarItem(
+                            selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.FOROS,
+                            onClick = {
+                                onForosClick()
+                                ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.FOROS
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.foros),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = stringResource(R.string.foros),
+                                    style = AppTypography.labelSmall
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Primary,
+                                unselectedIconColor = TextWhite,
+                                selectedTextColor = Primary,
+                                unselectedTextColor = TextWhite,
+                                indicatorColor = SurfaceComponent
+                            )
+                        )
+
+                        NavigationBarItem(
+                            selected = ultimaPantallaSeleccionada == UltimaPantallaSeleccionada.PERFILES,
+                            onClick = {
+                                onPerfilClick()
+                                ultimaPantallaSeleccionada = UltimaPantallaSeleccionada.PERFILES
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.usuario),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = stringResource(R.string.perfil),
+                                    style = AppTypography.labelSmall
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Primary,
+                                unselectedIconColor = TextWhite,
+                                selectedTextColor = Primary,
+                                unselectedTextColor = TextWhite,
+                                indicatorColor = SurfaceComponent
+                            )
+                        )
+                    }
                 }
-            }
 
-        ) { innerPadding ->
+            ) { innerPadding ->
 
-            // Contenido central
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                content()
+                // Contenido central
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(horizontal = 16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    content()
+                }
             }
         }
     }
@@ -313,6 +320,7 @@ fun ScaffoldPreview() {
     SeeShowTheme {
         Surface {
             AppScaffold(
+                esLogin = false,
                 onHomeClick = {},
                 onSeriesClick = {},
                 onCrearClick = {},
